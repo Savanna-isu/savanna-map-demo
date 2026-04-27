@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savanna Studio Field Trip Map &mdash; LA 2010 &mdash; Iowa State University</title>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <!-- Map title (top-right) -->
+  <div id="map-title">The places we've gone!</div>
+  <div id="map-subtitle">This map traces the places we have explored together through the Savanna Program since 2000. Browse by year, visit frequency, most recent visit, or ecological region to discover how our collective field experience has grown over time.</div>
+
+  <!-- Footer (bottom-right) -->
+  <div id="map-footer">
+    <div>Demo built in celebration of the Iowa State University Department of Landscape Architecture's centennial.</div>
+    <div>For questions or suggestions, reach us at <a href="mailto:yijunz@iastate.edu">yijunz@iastate.edu</a></div>
+  </div>
+
+  <!-- Year filter buttons (top-left row) -->
+  <div id="year-filters">
+    <button class="filter-btn active" data-year="all">All</button>
+    <button class="filter-btn" data-year="2000" style="--year-color:#004D40">2000</button>
+    <button class="filter-btn" data-year="2001" style="--year-color:#006064">2001</button>
+    <button class="filter-btn" data-year="2003" style="--year-color:#007B83">2003</button>
+    <button class="filter-btn" data-year="2004" style="--year-color:#0097A7">2004</button>
+    <button class="filter-btn" data-year="2005" style="--year-color:#039BE5">2005</button>
+    <button class="filter-btn" data-year="2006" style="--year-color:#0288D1">2006</button>
+    <button class="filter-btn" data-year="2007" style="--year-color:#0277BD">2007</button>
+    <button class="filter-btn" data-year="2008" style="--year-color:#014984">2008</button>
+    <button class="filter-btn" data-year="2010" style="--year-color:#013870">2010</button>
+    <button class="filter-btn" data-year="2011" style="--year-color:#00277A">2011</button>
+    <button class="filter-btn" data-year="2012" style="--year-color:#01579b">2012</button>
+    <button class="filter-btn" data-year="2013" style="--year-color:#0B52A0">2013</button>
+    <button class="filter-btn" data-year="2014" style="--year-color:#0C4DA8">2014</button>
+    <button class="filter-btn" data-year="2015" style="--year-color:#0d47a1">2015</button>
+    <button class="filter-btn" data-year="2016" style="--year-color:#1565c0">2016</button>
+    <button class="filter-btn" data-year="2017" style="--year-color:#1e88e5">2017</button>
+    <button class="filter-btn" data-year="2018" style="--year-color:#3949ab">2018</button>
+    <button class="filter-btn" data-year="2019" style="--year-color:#512da8">2019</button>
+    <button class="filter-btn" data-year="2021" style="--year-color:#4527a0">2021</button>
+    <button class="filter-btn" data-year="2022" style="--year-color:#7b1fa2">2022</button>
+    <button class="filter-btn" data-year="2023" style="--year-color:#9c27b0">2023</button>
+    <button class="filter-btn" data-year="2024" style="--year-color:#e65100">2024</button>
+    <button class="filter-btn" data-year="2025" style="--year-color:#ff6d00">2025</button>
+  </div>
+
+  <!-- Lodging / Frequency / Recency buttons (second row, top-left) — each wrapped with its legend -->
+  <div id="lodging-control">
+    <div class="btn-with-legend">
+      <button id="lodging-btn" class="lodging-btn">
+        <span class="lodging-btn-icons">
+          <svg width="13" height="13" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="15" width="18" height="3" rx="1" fill="currentColor"/><rect x="1" y="7" width="5" height="8" rx="0.5" fill="currentColor"/><rect x="7" y="4" width="5" height="11" rx="0.5" fill="currentColor"/><rect x="13" y="9" width="4" height="6" rx="0.5" fill="currentColor"/><rect x="2" y="9" width="1.5" height="1.5" rx="0.3" fill="white" opacity="0.9"/><rect x="4" y="9" width="1.5" height="1.5" rx="0.3" fill="white" opacity="0.9"/><rect x="8" y="6" width="1.5" height="1.5" rx="0.3" fill="white" opacity="0.9"/><rect x="10" y="6" width="1.5" height="1.5" rx="0.3" fill="white" opacity="0.9"/></svg>
+          <svg width="13" height="13" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,2 1,18 19,18" fill="currentColor"/><polygon points="10,4 6.5,18 13.5,18" fill="white" opacity="0.3"/><rect x="8.5" y="12" width="3" height="6" fill="white" rx="0.5"/></svg>
+        </span>
+        Lodging
+      </button>
+      <div id="lodging-legend" class="float-legend" style="display:none">
+        <div class="fl-row"><svg width="14" height="14" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="22" width="18" height="4" rx="1" fill="#b71c1c"/><rect x="1" y="10" width="5" height="12" rx="0.5" fill="#c62828"/><rect x="7" y="6" width="5" height="16" rx="0.5" fill="#e53935"/><rect x="13" y="13" width="4" height="9" rx="0.5" fill="#c62828"/></svg> Hotel</div>
+        <div class="fl-row"><svg width="14" height="14" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="21" width="18" height="5" rx="2" fill="#1b5e20"/><polygon points="9,1 0,22 18,22" fill="#2e7d32"/></svg> Campground</div>
+      </div>
+    </div>
+    <div class="btn-with-legend">
+      <button id="frequency-btn" class="lodging-btn">
+        <svg width="16" height="10" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="4"  cy="5" r="3.5" fill="#1b5e20"/>
+          <circle cx="12" cy="5" r="3.5" fill="#00c853"/>
+        </svg>
+        Frequency
+      </button>
+      <div id="frequency-legend" class="float-legend" style="display:none">
+        <div class="fl-row"><span class="fl-dot" style="background:#1b5e20"></span>1 visit</div>
+        <div class="fl-row"><span class="fl-dot" style="background:#388e3c"></span>2 – 4 visits</div>
+        <div class="fl-row"><span class="fl-dot" style="background:#00c853"></span>5 – 9 visits</div>
+        <div class="fl-row"><span class="fl-dot" style="background:#ccff33;border-color:rgba(0,0,0,0.25)"></span>10+ visits</div>
+      </div>
+    </div>
+    <div class="btn-with-legend">
+      <button id="color-mode-btn" class="lodging-btn">
+        <svg width="16" height="10" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="4"  cy="5" r="3.5" fill="#795548"/>
+          <circle cx="12" cy="5" r="3.5" fill="#FFD600" stroke="#C8A000" stroke-width="0.5"/>
+        </svg>
+        Recency
+      </button>
+      <div id="recency-legend" class="float-legend" style="display:none">
+        <div class="fl-row"><span class="fl-dot" style="background:#FFD600"></span>2022 – present</div>
+        <div class="fl-row"><span class="fl-dot" style="background:#F9A825"></span>2016 – 2021</div>
+        <div class="fl-row"><span class="fl-dot" style="background:#F57F17"></span>2010 – 2015</div>
+        <div class="fl-row"><span class="fl-dot" style="background:#795548"></span>before 2010</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Basemap + Ecoregion toggle buttons (bottom-left) -->
+  <div id="eco-controls">
+    <button id="basemap-btn" class="eco-btn">
+      <svg width="11" height="11" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:4px"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="10" cy="10" rx="4" ry="9" fill="none" stroke="currentColor" stroke-width="1"/><line x1="1" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="1"/></svg>Satellite
+    </button>
+    <!-- L1: button + hover submenu -->
+    <div class="eco-btn-wrap" id="eco-wrap-l1">
+      <button id="eco-btn-l1" class="eco-btn">Level I Ecological Regions</button>
+      <div id="eco-hover-l1" class="eco-hover-menu">
+        <button class="eco-filter-opt" id="eco-visited-l1">Show all regions</button>
+      </div>
+    </div>
+    <!-- L2: button + hover submenu -->
+    <div class="eco-btn-wrap" id="eco-wrap-l2">
+      <button id="eco-btn-l2" class="eco-btn">Level II Ecological Regions</button>
+      <div id="eco-hover-l2" class="eco-hover-menu">
+        <button class="eco-filter-opt" id="eco-visited-l2">Show all regions</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side panel (site detail) -->
+  <div id="side-panel">
+    <button id="close-panel" title="Close">&times;</button>
+    <div id="panel-header">
+      <div id="panel-site-name"></div>
+      <div id="panel-state"></div>
+      <div id="panel-chips"></div>
+    </div>
+    <div id="panel-tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="photos">Photos</button>
+      <button class="tab-btn" data-tab="sketches">Sketches</button>
+    </div>
+    <div id="panel-body">
+      <div id="tab-overview" class="tab-pane active"></div>
+      <div id="tab-photos"   class="tab-pane"></div>
+      <div id="tab-sketches" class="tab-pane"></div>
+    </div>
+  </div>
+
+  <!-- Year summary panel -->
+  <div id="year-panel">
+    <button id="close-year-panel" title="Close">&times;</button>
+    <div id="year-panel-inner">
+      <div id="yp-title"></div>
+      <div class="yp-section">
+        <div class="yp-label">Trips &amp; Destinations</div>
+        <div id="yp-trips"></div>
+      </div>
+      <div class="yp-section">
+        <div class="yp-label">Instructors</div>
+        <div id="yp-instructors"></div>
+      </div>
+      <div class="yp-section">
+        <div class="yp-label">Students</div>
+        <div id="yp-students"></div>
+      </div>
+      <div class="yp-section">
+        <div class="yp-label">Level I Ecological Regions</div>
+        <div id="yp-ecoregions"></div>
+        <div class="yp-label" style="margin-top:8px">Level II Ecological Regions</div>
+        <div id="yp-ecoregions-l2"></div>
+      </div>
+      <div class="yp-section" id="yp-photos-section">
+        <div class="yp-label">Photos</div>
+        <div id="yp-slideshow">
+          <img id="yp-slide-img" src="" alt="">
+          <div id="yp-slide-counter"></div>
+        </div>
+        <div id="yp-no-photos">No photos available yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>

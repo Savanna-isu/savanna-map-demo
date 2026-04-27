@@ -1,0 +1,983 @@
+{
+  "2000": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Spirit Lake, IA",
+        "Orange City, IA",
+        "Pipestone, MN",
+        "Theodore Roosevelt National Park, ND",
+        "International Peace Garden, ND",
+        "Riding Mountain National Park, MB",
+        "Winnipeg, MB",
+        "Lake Itasca, MN",
+        "Minneapolis, MN"
+      ],
+      "East Trip": [
+        "Effigy Mounds, IA",
+        "Dubuque, IA",
+        "Galena, IL",
+        "Taliesin, WI",
+        "Chicago, IL",
+        "St. Louis, MO",
+        "Ste. Genevieve, MO",
+        "Elephant Rocks State Park, MO",
+        "Kansas City, MO"
+      ],
+      "South Trip": [
+        "Oklahoma City, OK",
+        "Fort Worth, TX",
+        "San Antonio, TX",
+        "Corpus Christi, TX",
+        "Nuevo Laredo, TM",
+        "Chickasaw National Recreation Area, OK"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "BOREAL PLAIN",
+      "CENTRAL USA PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TAMAULIPAS-TEXAS SEMIARID PLAIN",
+      "TEMPERATE PRAIRIES",
+      "TEXAS-LOUISIANA COASTAL PLAIN",
+      "WEST-CENTRAL SEMIARID PRAIRIES"
+    ],
+    "photos": []
+  },
+  "2001": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Pipestone, MN",
+        "Theodore Roosevelt National Park, ND",
+        "International Peace Garden, ND",
+        "Winnipeg, MB",
+        "Lake Itasca, MN",
+        "Minneapolis, MN"
+      ],
+      "East Trip": [
+        "Dubuque, IA",
+        "Galena, IL",
+        "Chicago, IL",
+        "Indiana Dunes, IN"
+      ],
+      "South Trip": [
+        "Oklahoma City, OK",
+        "Fort Worth, TX",
+        "Enchanted Rock State Natural Area, TX",
+        "San Antonio, TX",
+        "Nuevo Laredo, TM",
+        "Chickasaw National Recreation Area, OK"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "CENTRAL USA PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "TAMAULIPAS-TEXAS SEMIARID PLAIN",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES"
+    ],
+    "photos": []
+  },
+  "2003": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Mitchell, SD",
+        "Sturgis, SD",
+        "Billings, MT",
+        "Missouri Headwaters State Park, MT",
+        "Yellowstone National Park, WY",
+        "Sheridan, WY",
+        "Black Hills, SD",
+        "Badlands National Park, SD",
+        "Pierre, SD",
+        "Niobrara State Park, NE"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Elephant Rocks State Park, MO",
+        "Memphis, TN",
+        "Leroy Percy State Park, MS",
+        "Natchez State Park, MS",
+        "New Orleans, LA",
+        "Grand Isle State Park, LA",
+        "Cape Girardeau, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2004": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Mason City, IA",
+        "Minneapolis, MN",
+        "Riverdale, ND",
+        "Minot, ND",
+        "Garrison Dam / Theodore Roosevelt National Park, ND"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "St. Joe State Park, MO",
+        "Johnson Shut-Ins State Park, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS"
+    ],
+    "ecoregions_l2": [
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES"
+    ],
+    "photos": []
+  },
+  "2005": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Mason City, IA",
+        "Lake Itasca, MN",
+        "Bemidji, MN",
+        "Minneapolis, MN"
+      ],
+      "South Trip": [
+        "Burlington, IA",
+        "St. Louis, MO",
+        "Ste. Genevieve, MO",
+        "Memphis, TN",
+        "New Orleans, LA"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES"
+    ],
+    "photos": []
+  },
+  "2006": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Lake Itasca, MN",
+        "Minneapolis, MN",
+        "Wyalusing State Park, WI",
+        "Dubuque, IA",
+        "Galena, IL",
+        "Burlington, IA",
+        "St. Louis, MO"
+      ],
+      "South Trip": [
+        "Johnson Shut-Ins State Park, MO",
+        "Memphis, TN",
+        "Clarksdale, MS",
+        "Natchez, MS",
+        "New Orleans, LA",
+        "Houma, LA",
+        "Grand Isle State Park, LA",
+        "Cape Girardeau, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES"
+    ],
+    "photos": []
+  },
+  "2007": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Blue Mounds State Park, MN",
+        "Winnipeg, MB",
+        "Boundary Waters, MN",
+        "Minneapolis, MN",
+        "Baraboo (Devils Lake State Park), WI",
+        "Chicago, IL"
+      ],
+      "South Trip": [
+        "Chickasaw National Recreation Area, OK",
+        "Fort Worth, TX",
+        "Enchanted Rock State Natural Area, TX",
+        "San Antonio, TX",
+        "Pesqueria (Monterrey area), NL",
+        "Big Bend National Park, TX"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTH AMERICAN DESERTS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "CENTRAL USA PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "TAMAULIPAS-TEXAS SEMIARID PLAIN",
+      "TEMPERATE PRAIRIES",
+      "WARM DESERTS"
+    ],
+    "photos": []
+  },
+  "2008": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "McCarthy Beach State Park, MN",
+        "Boundary Waters, MN",
+        "Duluth, MN",
+        "Devils Lake State Park, WI",
+        "Chicago, IL"
+      ],
+      "South Trip": [
+        "Kansas City, MO",
+        "Fayetteville, AR",
+        "Little Rock, AR",
+        "Queen Wilhelmina State Park, AR",
+        "Dallas, TX",
+        "Enchanted Rock State Natural Area, TX",
+        "San Antonio, TX",
+        "Big Thicket National Preserve, TX",
+        "Chickasaw National Recreation Area, OK"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "CENTRAL USA PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES"
+    ],
+    "photos": []
+  },
+  "2010": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Badlands National Park, SD",
+        "Black Hills (Custer State Park), SD",
+        "Yellowstone National Park, WY",
+        "Grand Teton National Park, WY",
+        "Denver, CO"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Elephant Rocks State Park, MO",
+        "Memphis, TN",
+        "Homochitto National Forest, MS",
+        "Natchez State Park, MS",
+        "New Orleans, LA",
+        "Gulf Islands National Seashore, MS",
+        "Blytheville, AR"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2011": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Badlands National Park, SD",
+        "Black Hills (Custer State Park), SD",
+        "Cody, WY",
+        "Yellowstone National Park, WY",
+        "Grand Teton National Park, WY",
+        "Denver, CO",
+        "Nicodemus, KS"
+      ],
+      "South Trip": [
+        "Oklahoma City, OK",
+        "Chickasaw National Recreation Area, OK",
+        "Dallas, TX",
+        "Enchanted Rock State Natural Area, TX",
+        "Marfa, TX",
+        "Big Bend National Park, TX",
+        "San Antonio, TX",
+        "Padre Island National Seashore, TX",
+        "Oklahoma City, OK"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTH AMERICAN DESERTS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "COLD DESERTS",
+      "MIXED WOOD PLAINS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "WARM DESERTS",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2012": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Lake Itasca, MN",
+        "Ely, MN",
+        "Duluth, MN",
+        "Devils Lake, WI",
+        "Chicago, IL",
+        "Galena, IL"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Johnson Shut-Ins State Park, MO",
+        "Memphis, TN",
+        "Homochitto National Forest, MS",
+        "New Orleans, LA",
+        "Horn Island, MS"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "NORTHERN FORESTS"
+    ],
+    "ecoregions_l2": [
+      "CENTRAL USA PLAINS",
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "MIXED WOOD SHIELD",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTHEASTERN USA PLAINS"
+    ],
+    "photos": []
+  },
+  "2013": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Badlands National Park, SD",
+        "Black Hills (Custer State Park), SD",
+        "Cody, WY",
+        "Gallatin Gateway, MT",
+        "Grand Teton National Park, WY",
+        "Denver, CO"
+      ],
+      "South Trip": [
+        "Columbus, IN",
+        "Nolin Lake State Park, KY",
+        "Great Smoky Mountains National Park, TN",
+        "Asheville, NC",
+        "Stone Mountain, GA",
+        "Jekyll Island, GA",
+        "Chattanooga, TN",
+        "St. Louis, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTH AMERICAN DESERTS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "CENTRAL USA PLAINS",
+      "COLD DESERTS",
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2014": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "St. Paul, MN",
+        "Badlands National Park, SD",
+        "Black Hills (Custer State Park), SD",
+        "Billings, MT",
+        "Livingston, MT",
+        "Grand Teton National Park, WY",
+        "Denver, CO",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "Columbus, IN",
+        "Taylorsville State Park, KY",
+        "Great Smoky Mountains National Park, TN",
+        "Asheville, NC",
+        "Skidaway Island State Park, GA",
+        "Atlanta, GA",
+        "Hermitage, TN",
+        "St. Louis, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "CENTRAL USA PLAINS",
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2015": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Douglas, WY",
+        "Cheyenne, WY",
+        "Rocky Mountain National Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Johnson Shut-Ins State Park, MO",
+        "Memphis, TN",
+        "Hollandale (Leroy Percy State Park), MS",
+        "Natchez State Park, MS",
+        "New Orleans, LA",
+        "Grand Isle State Park, LA",
+        "Cape Girardeau, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2016": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Douglas, WY",
+        "Cheyenne, WY",
+        "Rocky Mountain National Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Johnson Shut-Ins State Park, MO",
+        "Memphis, TN",
+        "Ridgeland (Barnett Reservoir), MS",
+        "Homochitto National Forest, MS",
+        "New Orleans, LA",
+        "Grand Isle State Park, LA",
+        "Cape Girardeau, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2017": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Douglas, WY",
+        "Cheyenne, WY",
+        "Rocky Mountain National Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Johnson Shut-Ins State Park, MO",
+        "Memphis, TN",
+        "Ridgeland (Barnett Reservoir), MS",
+        "Homochitto National Forest, MS",
+        "New Orleans, LA",
+        "Grand Isle State Park, LA",
+        "Sikeston, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2018": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Douglas, WY",
+        "Cheyenne, WY",
+        "Rocky Mountain National Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "Kansas City, MO",
+        "Oklahoma City, OK",
+        "Chickasaw National Recreation Area, OK",
+        "Fort Worth, TX",
+        "Enchanted Rock State Natural Area, TX",
+        "Colorado Bend State Park, TX",
+        "San Antonio, TX",
+        "Goose Island State Park, TX",
+        "Oklahoma City, OK"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MIXED WOOD PLAINS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "TEMPERATE PRAIRIES",
+      "TEXAS-LOUISIANA COASTAL PLAIN",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2019": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Douglas, WY",
+        "Cheyenne, WY",
+        "Rocky Mountain National Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "Kansas City, MO",
+        "Tulsa, OK",
+        "Chickasaw National Recreation Area, OK",
+        "Fort Worth, TX",
+        "Enchanted Rock State Natural Area, TX",
+        "Concan (Garner State Park), TX",
+        "San Antonio, TX",
+        "Corpus Christi, TX",
+        "Oklahoma City, OK"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MIXED WOOD PLAINS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "TEMPERATE PRAIRIES",
+      "TEXAS-LOUISIANA COASTAL PLAIN",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2021": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Sidney, NE",
+        "Estes Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Johnson's Shut-Ins State Park, MO",
+        "Bentonville, AR",
+        "Lake Ouachita State Park, AR",
+        "Fort Worth, TX",
+        "Chickasaw National Recreation Area, OK",
+        "Tulsa, OK",
+        "Kansas City, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2022": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Minneapolis, MN",
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Sidney, NE",
+        "Rocky Mountain National Park \u2013 Estes Park, CO",
+        "Denver, CO",
+        "Lake Ogallala, NE",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "Kansas City, MO",
+        "Rogers (Prairie Creek Recreation Area), AR",
+        "Tulsa, OK",
+        "Chickasaw National Recreation Area, OK",
+        "Fort Worth, TX",
+        "Concan (Garner State Park), TX",
+        "San Antonio, TX",
+        "Corpus Christi (Mustang Island State Park), TX",
+        "Ardmore, OK",
+        "Manhattan, KS"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MIXED WOOD PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "TEMPERATE PRAIRIES",
+      "TEXAS-LOUISIANA COASTAL PLAIN",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2023": {
+    "instructors": [],
+    "student_count": null,
+    "student_type": null,
+    "trips": {
+      "NW Trip": [
+        "Sioux Falls, SD",
+        "Badlands National Park, SD",
+        "Custer State Park, SD",
+        "Douglas, WY",
+        "Steamboat Springs, CO",
+        "Great Sand Dunes National Park, CO",
+        "Cascade (Pikes Peak area), CO",
+        "Denver, CO",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "St. Louis, MO",
+        "Johnson's Shut-Ins State Park, MO",
+        "Hernando, MS",
+        "Homochitto National Forest, MS",
+        "New Orleans, LA",
+        "Grand Isle State Park, LA",
+        "Millington (Meeman State Park), TN",
+        "Kansas City, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2024": {
+    "instructors": [
+      "Michael Martin",
+      "Yijun Zeng",
+      "Lauren Iversen",
+      "Mindy Cooper"
+    ],
+    "student_count": 32,
+    "student_type": "Undergraduate",
+    "trips": {
+      "NW Trip": [
+        "Sioux City, IA",
+        "Sioux Falls, SD",
+        "Badlands, SD",
+        "Custer, SD",
+        "Carhenge, NE",
+        "Denver, CO",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "Mark Twain, MO",
+        "St. Louis, MO",
+        "Elephant Rock, MO",
+        "Johnson Shut-Ins, MO",
+        "Memphis, TN",
+        "Windsor Ruins, MS",
+        "Natchez, MS",
+        "New Orleans, LA",
+        "Kansas City, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  },
+  "2025": {
+    "instructors": [
+      "Michael Martin",
+      "Yijun Zeng",
+      "Scott Schuckert",
+      "Mindy Cooper"
+    ],
+    "student_count": 28,
+    "student_type": "Undergraduate",
+    "trips": {
+      "NW Trip": [
+        "Sioux City, IA",
+        "Sioux Falls, SD",
+        "Badlands, SD",
+        "Custer, SD",
+        "Carhenge, NE",
+        "Denver, CO",
+        "Omaha, NE"
+      ],
+      "South Trip": [
+        "Mark Twain, MO",
+        "St. Louis, MO",
+        "Elephant Rock, MO",
+        "Johnson Shut-Ins, MO",
+        "Memphis, TN",
+        "Windsor Ruins, MS",
+        "Natchez, MS",
+        "New Orleans, LA",
+        "Kansas City, MO"
+      ]
+    },
+    "ecoregions": [
+      "EASTERN TEMPERATE FORESTS",
+      "GREAT PLAINS",
+      "NORTHWESTERN FORESTED MOUNTAINS"
+    ],
+    "ecoregions_l2": [
+      "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS",
+      "OZARK/OUACHITA-APPALACHIAN FORESTS",
+      "SOUTH CENTRAL SEMIARID PRAIRIES",
+      "SOUTHEASTERN USA PLAINS",
+      "TEMPERATE PRAIRIES",
+      "WEST-CENTRAL SEMIARID PRAIRIES",
+      "WESTERN CORDILLERA"
+    ],
+    "photos": []
+  }
+}
