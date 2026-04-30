@@ -19,6 +19,7 @@
   <div id="map-footer">
     <div>Demo built in celebration of the Iowa State University Department of Landscape Architecture's centennial.</div>
     <div>For questions or suggestions, reach us at <a href="mailto:yijunz@iastate.edu">yijunz@iastate.edu</a></div>
+    <div style="margin-top:8px"><a href="submit.html" style="color:#F1BE48;font-weight:700;">✦ Share your Savanna story</a></div>
   </div>
 
   <!-- Year filter buttons (top-left row) -->
@@ -127,13 +128,11 @@
     </div>
     <div id="panel-tabs">
       <button class="tab-btn active" data-tab="overview">Overview</button>
-      <button class="tab-btn" data-tab="photos">Photos</button>
-      <button class="tab-btn" data-tab="sketches">Sketches</button>
+      <button class="tab-btn" data-tab="photos">Stories</button>
     </div>
     <div id="panel-body">
       <div id="tab-overview" class="tab-pane active"></div>
-      <div id="tab-photos"   class="tab-pane"></div>
-      <div id="tab-sketches" class="tab-pane"></div>
+      <div id="tab-photos" class="tab-pane"></div>
     </div>
   </div>
 
@@ -162,10 +161,7 @@
       </div>
       <div class="yp-section" id="yp-photos-section">
         <div class="yp-label">Photos</div>
-        <div id="yp-slideshow">
-          <img id="yp-slide-img" src="" alt="">
-          <div id="yp-slide-counter"></div>
-        </div>
+        <div id="yp-strip-wrap"></div>
         <div id="yp-no-photos">No photos available yet.</div>
       </div>
     </div>
@@ -173,9 +169,24 @@
 
   <!-- Lightbox -->
   <div id="lightbox">
+    <button id="lightbox-close">&times;</button>
+    <button id="lb-prev" class="lb-nav-btn">&#8249;</button>
     <img id="lightbox-img" src="" alt="">
+    <button id="lb-next" class="lb-nav-btn">&#8250;</button>
+    <div id="lightbox-caption">
+      <div id="lb-description"></div>
+      <div id="lb-meta">
+        <span id="lb-contributor"></span>
+        <span id="lb-year"></span>
+        <button id="lb-like-btn" class="lb-like-btn">
+          &#9829; <span id="lb-like-count">0</span>
+        </button>
+      </div>
+    </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
   <script src="map.js"></script>
 </body>

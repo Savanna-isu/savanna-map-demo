@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Your Story — Savanna Studio Field Trips</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #EDE8DE;
+      color: #3B2F1E;
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #C8102E;
+      color: #fff;
+      padding: 18px 32px 14px;
+      border-bottom: 4px solid #F1BE48;
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    header .header-links {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-left: auto;
+    }
+    header a {
+      color: #F1BE48;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+    header a:hover { text-decoration: underline; }
+    header .admin-link {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.78rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 3px;
+      padding: 2px 8px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    header .admin-link:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+
+    /* ── Page layout ── */
+    .page {
+      max-width: 680px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+    }
+
+    .intro {
+      background: #F5F0E8;
+      border: 1px solid #C8B898;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      color: #5C4A30;
+    }
+    .intro strong { color: #C8102E; }
+
+    /* ── Form card ── */
+    .form-card {
+      background: #F5F0E8;
+      border: 1px solid #C8B898;
+      border-radius: 8px;
+      padding: 28px 28px 32px;
+    }
+
+    .form-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8A7A68;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #C8B898;
+    }
+
+    .field-group {
+      margin-bottom: 18px;
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #5C4A30;
+      margin-bottom: 5px;
+    }
+    label .optional {
+      font-weight: 400;
+      color: #8A7A68;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid #C8B898;
+      border-radius: 5px;
+      background: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: #3B2F1E;
+      transition: border-color 0.15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #8A7A68;
+    }
+    textarea { resize: vertical; line-height: 1.55; }
+
+    /* ── Photo upload ── */
+    .upload-area {
+      border: 2px dashed #C8B898;
+      border-radius: 6px;
+      background: #fff;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .upload-area:hover, .upload-area.drag-over {
+      border-color: #8A7A68;
+      background: #F5F0E8;
+    }
+    .upload-area input[type="file"] { display: none; }
+    .upload-area .upload-icon { font-size: 2rem; margin-bottom: 8px; }
+    .upload-area p { font-size: 0.85rem; color: #8A7A68; line-height: 1.5; }
+    .upload-area strong { color: #5C4A30; }
+
+    #photo-previews {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .preview-thumb {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .preview-thumb img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #C8B898;
+    }
+    .preview-thumb .remove-photo {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      background: #C8102E;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 11px;
+      line-height: 18px;
+      text-align: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #C8B898;
+      margin: 24px 0;
+    }
+
+    /* ── Submit button ── */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: #C8102E;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 24px;
+    }
+    .submit-btn:hover { background: #a00d25; }
+    .submit-btn:disabled { background: #C8B898; cursor: not-allowed; }
+
+    /* ── Status messages ── */
+    #status-msg {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    #status-msg.success {
+      display: block;
+      background: #E8F5E9;
+      border: 1px solid #A5D6A7;
+      color: #2E7D32;
+    }
+    #status-msg.error {
+      display: block;
+      background: #FFEBEE;
+      border: 1px solid #EF9A9A;
+      color: #B71C1C;
+    }
+
+    /* ── Upload progress ── */
+    #upload-progress {
+      display: none;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #5C4A30;
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      .field-row { grid-template-columns: 1fr; }
+      header { padding: 14px 16px 12px; }
+      .form-card { padding: 20px 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Savanna Studio — Share Your Story</h1>
+  <div class="header-links">
+    <a href="index.html">← Back to map</a>
+    <a href="admin.html" class="admin-link">Admin Log-in</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="intro">
+    <strong>We want to hear from you.</strong> If you traveled with the Savanna Studio program, share a memory, reflection, or photo from your trip. Submissions are reviewed before appearing on the map.
+  </div>
+
+  <div class="form-card">
+
+    <p class="form-section-title">About you</p>
+
+    <div class="field-row">
+      <div>
+        <label for="alumni-name">Your name</label>
+        <input type="text" id="alumni-name" placeholder="First Last" required>
+      </div>
+      <div>
+        <label for="alumni-email">Email <span class="optional">(not shown publicly)</span></label>
+        <input type="email" id="alumni-email" placeholder="you@example.com" required>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="form-section-title">The place &amp; year</p>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label for="site-select">Site visited</label>
+        <select id="site-select" required>
+          <option value="">Loading sites…</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="year-select">Year of visit</label>
+        <select id="year-select" required>
+          <option value="">Select a site first</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="form-section-title">Your story</p>
+
+    <div class="field-group">
+      <label for="story-text">What do you remember? <span class="optional">(max 2000 characters)</span></label>
+      <textarea id="story-text" rows="7" maxlength="2000"
+        placeholder="Share a memory, reflection, or observation from this place…"></textarea>
+      <div style="text-align:right; font-size:0.78rem; color:#8A7A68; margin-top:4px;">
+        <span id="char-count">0</span> / 2000
+      </div>
+    </div>
+
+    <hr class="divider">
+    <p class="form-section-title">Photos <span style="font-weight:400;text-transform:none;font-size:0.8rem;color:#8A7A68"> — optional, up to 3 images (JPG/PNG, max 10 MB each)</span></p>
+
+    <div class="upload-area" id="upload-area" onclick="document.getElementById('photo-input').click()">
+      <div class="upload-icon">📷</div>
+      <p><strong>Click to choose photos</strong> or drag and drop here</p>
+      <p>JPG or PNG · up to 3 files · 10 MB each</p>
+      <input type="file" id="photo-input" accept="image/jpeg,image/png" multiple>
+    </div>
+    <div id="photo-previews"></div>
+
+    <div id="upload-progress">Uploading photos and saving your story…</div>
+
+    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Submit My Story</button>
+
+    <div id="status-msg"></div>
+
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="firebase-api.js"></script>
+
+<script>
+  // ── Load sites into dropdowns ─────────────────────────────────────────────
+
+  const STATE_NAMES = {
+    AR:'Arkansas', CO:'Colorado', GA:'Georgia', IA:'Iowa', IL:'Illinois',
+    IN:'Indiana', KS:'Kansas', KY:'Kentucky', LA:'Louisiana', MB:'Manitoba, Canada',
+    MN:'Minnesota', MO:'Missouri', MS:'Mississippi', MT:'Montana', NC:'North Carolina',
+    ND:'North Dakota', NE:'Nebraska', NL:'Nuevo León, Mexico', OK:'Oklahoma',
+    SD:'South Dakota', TM:'Tamaulipas, Mexico', TN:'Tennessee', TX:'Texas',
+    WI:'Wisconsin', WY:'Wyoming',
+  };
+
+  let sitesData = [];
+  let selectedFiles = [];
+
+  async function loadSites() {
+    try {
+      const resp = await fetch('data/sites.json');
+      sitesData = await resp.json();
+
+      // Exclude Ames (home base, not a field trip destination)
+      const fieldSites = sitesData.filter(s => s.id !== 'ames-ia');
+
+      // Sort by full state name, then site name within state
+      fieldSites.sort((a, b) => {
+        const sa = STATE_NAMES[a.state] || a.state;
+        const sb = STATE_NAMES[b.state] || b.state;
+        return sa !== sb ? sa.localeCompare(sb) : a.name.localeCompare(b.name);
+      });
+
+      // Build grouped <optgroup> by state
+      const sel = document.getElementById('site-select');
+      sel.innerHTML = '<option value="">— Choose a site —</option>';
+      let currentState = null;
+      let group = null;
+      for (const site of fieldSites) {
+        const stateName = STATE_NAMES[site.state] || site.state;
+        if (stateName !== currentState) {
+          group = document.createElement('optgroup');
+          group.label = stateName;
+          sel.appendChild(group);
+          currentState = stateName;
+        }
+        const opt = document.createElement('option');
+        opt.value = site.id;
+        opt.textContent = site.name;
+        group.appendChild(opt);
+      }
+    } catch (e) {
+      console.error('Could not load sites:', e);
+      document.getElementById('site-select').innerHTML =
+        '<option value="">Failed to load sites</option>';
+    }
+  }
+
+  document.getElementById('site-select').addEventListener('change', function () {
+    const site = sitesData.find(s => s.id === this.value);
+    const yearSel = document.getElementById('year-select');
+    yearSel.innerHTML = '<option value="">— Choose a year —</option>';
+    if (site) {
+      const years = site.visits.map(v => v.year).sort((a, b) => b - a);
+      for (const y of years) {
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        yearSel.appendChild(opt);
+      }
+    }
+  });
+
+  // ── Character counter ─────────────────────────────────────────────────────
+
+  document.getElementById('story-text').addEventListener('input', function () {
+    document.getElementById('char-count').textContent = this.value.length;
+  });
+
+  // ── Photo upload / preview ────────────────────────────────────────────────
+
+  const MAX_PHOTOS = 3;
+  const MAX_SIZE   = 10 * 1024 * 1024; // 10 MB
+
+  function refreshPreviews() {
+    const container = document.getElementById('photo-previews');
+    container.innerHTML = '';
+    selectedFiles.forEach((file, i) => {
+      const url  = URL.createObjectURL(file);
+      const wrap = document.createElement('div');
+      wrap.className = 'preview-thumb';
+      wrap.innerHTML = `
+        <img src="${url}" alt="">
+        <button class="remove-photo" onclick="removePhoto(${i})" title="Remove">✕</button>
+      `;
+      container.appendChild(wrap);
+    });
+  }
+
+  function removePhoto(index) {
+    selectedFiles.splice(index, 1);
+    refreshPreviews();
+  }
+
+  document.getElementById('photo-input').addEventListener('change', function () {
+    addFiles(Array.from(this.files));
+    this.value = ''; // reset so same file can be re-selected
+  });
+
+  function addFiles(files) {
+    const errors = [];
+    for (const f of files) {
+      if (selectedFiles.length >= MAX_PHOTOS) {
+        errors.push(`Max ${MAX_PHOTOS} photos allowed.`);
+        break;
+      }
+      if (!['image/jpeg', 'image/png'].includes(f.type)) {
+        errors.push(`"${f.name}" is not a JPG or PNG.`);
+        continue;
+      }
+      if (f.size > MAX_SIZE) {
+        errors.push(`"${f.name}" exceeds 10 MB.`);
+        continue;
+      }
+      selectedFiles.push(f);
+    }
+    if (errors.length) showStatus(errors.join(' '), 'error');
+    refreshPreviews();
+  }
+
+  // Drag-and-drop on upload area
+  const uploadArea = document.getElementById('upload-area');
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.classList.remove('drag-over');
+    addFiles(Array.from(e.dataTransfer.files));
+  });
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+
+  function showStatus(msg, type) {
+    const el = document.getElementById('status-msg');
+    el.textContent = msg;
+    el.className = type;
+  }
+
+  async function handleSubmit() {
+    const name    = document.getElementById('alumni-name').value.trim();
+    const email   = document.getElementById('alumni-email').value.trim();
+    const siteId  = document.getElementById('site-select').value;
+    const year    = document.getElementById('year-select').value;
+    const story   = document.getElementById('story-text').value.trim();
+
+    // Basic validation
+    if (!name)    return showStatus('Please enter your name.', 'error');
+    if (!email || !email.includes('@')) return showStatus('Please enter a valid email address.', 'error');
+    if (!siteId)  return showStatus('Please select a site.', 'error');
+    if (!year)    return showStatus('Please select a year.', 'error');
+    if (!story)   return showStatus('Please write something before submitting.', 'error');
+
+    const site = sitesData.find(s => s.id === siteId);
+
+    const btn = document.getElementById('submit-btn');
+    const progress = document.getElementById('upload-progress');
+    btn.disabled = true;
+    progress.style.display = 'block';
+    document.getElementById('status-msg').className = '';
+
+    try {
+      await submitStory({
+        siteId,
+        siteName:    site.name,
+        year:        Number(year),
+        alumniName:  name,
+        alumniEmail: email,
+        story,
+        photos:      selectedFiles,
+      });
+
+      progress.style.display = 'none';
+      showStatus(
+        'Thank you! Your story has been submitted and will appear on the map after review.',
+        'success'
+      );
+
+      // Reset form
+      document.getElementById('alumni-name').value    = '';
+      document.getElementById('alumni-email').value   = '';
+      document.getElementById('site-select').value    = '';
+      document.getElementById('year-select').innerHTML = '<option value="">Select a site first</option>';
+      document.getElementById('story-text').value     = '';
+      document.getElementById('char-count').textContent = '0';
+      selectedFiles = [];
+      refreshPreviews();
+
+    } catch (err) {
+      console.error(err);
+      progress.style.display = 'none';
+      showStatus(
+        'Submission failed: ' + (err.message || 'Unknown error. Please try again.'),
+        'error'
+      );
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  loadSites();
+</script>
+</body>
+</html>

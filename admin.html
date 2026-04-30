@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Savanna Studio Submissions</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #EDE8DE;
+      color: #3B2F1E;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #C8102E;
+      color: #fff;
+      padding: 16px 28px 12px;
+      border-bottom: 4px solid #F1BE48;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    #signout-btn {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: none;
+    }
+    #signout-btn:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Login screen ── */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+    }
+    .login-card {
+      background: #F5F0E8;
+      border: 1px solid #C8B898;
+      border-radius: 8px;
+      padding: 36px 36px 32px;
+      width: 340px;
+    }
+    .login-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #5C4A30;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .login-card label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #5C4A30;
+      margin-bottom: 4px;
+    }
+    .login-card input {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid #C8B898;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .login-card input:focus { outline: none; border-color: #8A7A68; }
+    .login-btn {
+      width: 100%;
+      padding: 11px;
+      background: #C8102E;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+    .login-btn:hover { background: #a00d25; }
+    #login-error {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #FFEBEE;
+      border: 1px solid #EF9A9A;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #B71C1C;
+    }
+
+    /* ── Admin panel ── */
+    #admin-panel { display: none; padding: 28px; }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .panel-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #3B2F1E;
+    }
+    .badge {
+      background: #C8102E;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    /* ── Tab bar ── */
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      border-bottom: 2px solid #C8B898;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      padding: 7px 18px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #8A7A68;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .tab-btn.active { color: #C8102E; border-bottom-color: #C8102E; }
+
+    /* ── Submission cards ── */
+    #submissions-list { display: flex; flex-direction: column; gap: 18px; }
+
+    .sub-card {
+      background: #F5F0E8;
+      border: 1px solid #C8B898;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .sub-card-header {
+      padding: 14px 18px 10px;
+      border-bottom: 1px solid #C8B898;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .sub-card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .sub-card-meta {
+      font-size: 0.78rem;
+      color: #8A7A68;
+    }
+    .sub-card-body { padding: 14px 18px; }
+    .sub-story {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      margin-bottom: 12px;
+      color: #3B2F1E;
+    }
+    .sub-submitter {
+      font-size: 0.8rem;
+      color: #5C4A30;
+      margin-bottom: 10px;
+    }
+    .sub-photos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .sub-photos img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #C8B898;
+      cursor: pointer;
+    }
+    .sub-actions {
+      display: flex;
+      gap: 10px;
+      padding: 12px 18px;
+      border-top: 1px solid #C8B898;
+      background: #EDE8DE;
+    }
+    .btn-approve {
+      padding: 7px 20px;
+      background: #2E7D32;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-approve:hover { background: #1b5e20; }
+    .btn-reject {
+      padding: 7px 20px;
+      background: transparent;
+      color: #B71C1C;
+      border: 1px solid #B71C1C;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-reject:hover { background: #FFEBEE; }
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pill-approved { background: #E8F5E9; color: #2E7D32; }
+    .pill-rejected { background: #FFEBEE; color: #B71C1C; }
+    .pill-pending  { background: #FFF8E1; color: #F57F17; }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 0;
+      color: #8A7A68;
+      font-size: 0.95rem;
+    }
+
+    #loading-msg { text-align: center; padding: 48px; color: #8A7A68; }
+
+    /* Lightbox */
+    #lb {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lb.open { display: flex; }
+    #lb img { max-width: 90vw; max-height: 90vh; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Savanna Studio — Submission Review</h1>
+  <button id="signout-btn" onclick="handleSignOut()">Sign out</button>
+</header>
+
+<!-- Login -->
+<div id="login-screen">
+  <div class="login-card">
+    <h2>Admin Sign In</h2>
+    <label for="login-email">Email</label>
+    <input type="email" id="login-email" placeholder="admin@example.com">
+    <label for="login-password">Password</label>
+    <input type="password" id="login-password" placeholder="••••••••"
+           onkeydown="if(event.key==='Enter') handleLogin()">
+    <button class="login-btn" onclick="handleLogin()">Sign In</button>
+    <div id="login-error"></div>
+  </div>
+</div>
+
+<!-- Admin panel -->
+<div id="admin-panel">
+  <div class="panel-header">
+    <h2>Pending Submissions</h2>
+    <span class="badge" id="pending-count">…</span>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="pending"  onclick="switchTab('pending')">Pending</button>
+    <button class="tab-btn"        data-tab="approved" onclick="switchTab('approved')">Approved</button>
+    <button class="tab-btn"        data-tab="rejected" onclick="switchTab('rejected')">Rejected</button>
+  </div>
+
+  <div id="loading-msg">Loading submissions…</div>
+  <div id="submissions-list"></div>
+</div>
+
+<!-- Lightbox -->
+<div id="lb" onclick="document.getElementById('lb').classList.remove('open')">
+  <img id="lb-img" src="" alt="">
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="firebase-api.js"></script>
+
+<script>
+  let currentTab = 'pending';
+
+  // ── Auth state ─────────────────────────────────────────────────────────────
+
+  onAuthStateChanged(user => {
+    if (user) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display  = 'block';
+      document.getElementById('signout-btn').style.display  = 'inline-block';
+      loadTab(currentTab);
+    } else {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('admin-panel').style.display  = 'none';
+      document.getElementById('signout-btn').style.display  = 'none';
+    }
+  });
+
+  async function handleLogin() {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl    = document.getElementById('login-error');
+    errEl.style.display = 'none';
+    try {
+      await adminSignIn(email, password);
+    } catch (e) {
+      errEl.textContent    = e.message || 'Sign-in failed.';
+      errEl.style.display  = 'block';
+    }
+  }
+
+  async function handleSignOut() {
+    await adminSignOut();
+  }
+
+  // ── Tabs ───────────────────────────────────────────────────────────────────
+
+  function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.tab === tab));
+    loadTab(tab);
+  }
+
+  async function loadTab(tab) {
+    const list    = document.getElementById('submissions-list');
+    const loading = document.getElementById('loading-msg');
+    list.innerHTML = '';
+    loading.style.display = 'block';
+
+    try {
+      let items;
+      if (tab === 'pending') {
+        items = await getPendingSubmissions();
+        document.getElementById('pending-count').textContent = items.length;
+      } else {
+        // For approved/rejected we query directly
+        const snap = await firebase.firestore().collection('submissions')
+          .where('status', '==', tab)
+          .orderBy('reviewedAt', 'desc')
+          .get();
+        items = snap.docs.map(d => ({ id: d.id, ...d.data(),
+          submittedAt: d.data().submittedAt?.toDate?.() ?? null,
+          reviewedAt:  d.data().reviewedAt?.toDate?.()  ?? null }));
+      }
+
+      loading.style.display = 'none';
+
+      if (!items.length) {
+        list.innerHTML = `<div class="empty-state">No ${tab} submissions.</div>`;
+        return;
+      }
+
+      list.innerHTML = items.map(s => renderCard(s, tab)).join('');
+
+    } catch (e) {
+      loading.style.display = 'none';
+      list.innerHTML = `<div class="empty-state" style="color:#B71C1C">
+        Error loading submissions: ${e.message}</div>`;
+    }
+  }
+
+  function renderCard(s, tab) {
+    const date = s.submittedAt
+      ? s.submittedAt.toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' })
+      : 'Unknown date';
+
+    const photos = (s.photoUrls || []).map(url =>
+      `<img src="${url}" alt="" onclick="openLb('${url}')">`).join('');
+
+    const pillClass = { pending:'pill-pending', approved:'pill-approved', rejected:'pill-rejected' }[s.status];
+
+    const actions = tab === 'pending' ? `
+      <div class="sub-actions">
+        <button class="btn-approve" onclick="doApprove('${s.id}')">Approve</button>
+        <button class="btn-reject"  onclick="doReject('${s.id}')">Reject</button>
+      </div>` : '';
+
+    return `
+      <div class="sub-card" id="card-${s.id}">
+        <div class="sub-card-header">
+          <div>
+            <span class="sub-card-title">${esc(s.siteName)}</span>
+            <span class="sub-card-meta"> · ${s.year} · submitted ${date}</span>
+          </div>
+          <span class="status-pill ${pillClass}">${s.status}</span>
+        </div>
+        <div class="sub-card-body">
+          <div class="sub-submitter">By <strong>${esc(s.alumniName)}</strong></div>
+          <div class="sub-story">${esc(s.story)}</div>
+          ${photos ? `<div class="sub-photos">${photos}</div>` : ''}
+        </div>
+        ${actions}
+      </div>`;
+  }
+
+  async function doApprove(id) {
+    if (!confirm('Approve this submission? It will become visible on the map.')) return;
+    try {
+      await approveSubmission(id);
+      document.getElementById(`card-${id}`)?.remove();
+      updatePendingBadge(-1);
+    } catch (e) { alert('Error: ' + e.message); }
+  }
+
+  async function doReject(id) {
+    if (!confirm('Reject this submission?')) return;
+    try {
+      await rejectSubmission(id);
+      document.getElementById(`card-${id}`)?.remove();
+      updatePendingBadge(-1);
+    } catch (e) { alert('Error: ' + e.message); }
+  }
+
+  function updatePendingBadge(delta) {
+    const el = document.getElementById('pending-count');
+    el.textContent = Math.max(0, Number(el.textContent) + delta);
+  }
+
+  function openLb(url) {
+    document.getElementById('lb-img').src = url;
+    document.getElementById('lb').classList.add('open');
+  }
+
+  function esc(str) {
+    return String(str ?? '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+</body>
+</html>

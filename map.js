@@ -1,4 +1,17 @@
 // ============================================================
+// FIREBASE INIT
+// ============================================================
+firebase.initializeApp({
+  apiKey: 'AIzaSyCNiRgNSRsji3mEnj-0A8IPnp9NfSjJE1g',
+  authDomain: 'savanna-map-bbfc7.firebaseapp.com',
+  projectId: 'savanna-map-bbfc7',
+  storageBucket: 'savanna-map-bbfc7.firebasestorage.app',
+  messagingSenderId: '427537993436',
+  appId: '1:427537993436:web:4bc433fdd1b99edf266e19',
+});
+const db = firebase.firestore();
+
+// ============================================================
 // MAPBOX ACCESS TOKEN
 // ============================================================
 mapboxgl.accessToken = 'pk.eyJ1Ijoidmlja3l6ZW5neWoiLCJhIjoiY21vZ2xkNXdrMTJ2ZDJxb2syNjl1MXFjNCJ9.5B5fOEkKbwtD8ihe82fVvQ';
@@ -146,7 +159,6 @@ let sites = [];
 let activeYear = 'all';
 let selectedSiteId = null;
 const siteMarkerEls = {};   // siteId -> pin DOM element
-const mediaCsvCache = {};   // 'siteId:type' -> Map<filename, {year,description}>
 const ecoVisible   = { l1: false, l2: false };  // ecoregion layer toggle state
 
 // ===== MAP INIT =====
@@ -518,33 +530,161 @@ function setPinDimming(year) {
   });
 }
 
-// ===== CSV LOADER =====
-async function loadMediaCsv(siteId, type) {
-  const key = `${siteId}:${type}`;
-  if (mediaCsvCache[key]) return mediaCsvCache[key];
-  const result = new Map();
+// ===== FIREBASE PHOTOS TAB =====
+let currentPhotoSiteId = null;
+
+async function renderPhotosTab(siteId) {
+  currentPhotoSiteId = siteId;
+  const pane = document.getElementById('tab-photos');
+  pane.innerHTML = '<p class="media-empty">Loading photos…</p>';
+
+  let docs = [];
   try {
-    const resp = await fetch(`media/${siteId}/${type}.csv`);
-    if (resp.ok) {
-      const lines = (await resp.text()).split('\n');
-      for (let i = 1; i < lines.length; i++) {   // skip header row
-        const line = lines[i].trim();
-        if (!line) continue;
-        const first  = line.indexOf(',');
-        const second = line.indexOf(',', first + 1);
-        if (first < 0) continue;
-        const filename    = line.slice(0, first).trim();
-        const description = second >= 0 ? line.slice(second + 1).trim() : '';
-        if (filename) result.set(filename, { description });
-      }
+    const snapshot = await db.collection('photos')
+      .where('siteId', '==', siteId)
+      .where('status', '==', 'approved')
+      .get();
+    if (siteId !== currentPhotoSiteId) return;
+    docs = snapshot.docs;
+  } catch (e) {
+    console.error('Failed to load photos:', e);
+    if (siteId === currentPhotoSiteId) {
+      pane.innerHTML = '<p class="media-empty">Could not load photos.</p>';
     }
-  } catch { /* no CSV — silently ignore */ }
-  mediaCsvCache[key] = result;
-  return result;
+    return;
+  }
+
+  if (docs.length === 0) {
+    pane.innerHTML = '<p class="media-empty">No stories yet for this site.</p>';
+    return;
+  }
+
+  pane.innerHTML = '';
+
+  // Sort bar — icon-only button + dropdown
+  const SORT_LABELS = { likes: 'Most Liked', year: 'By Year', recent: 'Newest' };
+  let currentSort = 'likes';
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'photos-sort-bar';
+  toolbar.innerHTML = `
+    <button class="lodging-btn sort-icon-btn" title="Sort stories">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 4h5M2 8h8M2 12h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M13 2v9m0 0l-2-2.5M13 11l2-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="sort-dropdown">
+      <button class="sort-option active" data-sort="likes">Most Liked</button>
+      <button class="sort-option" data-sort="year">By Year</button>
+      <button class="sort-option" data-sort="recent">Newest</button>
+    </div>
+  `;
+  pane.appendChild(toolbar);
+
+  const iconBtn  = toolbar.querySelector('.sort-icon-btn');
+  const dropdown = toolbar.querySelector('.sort-dropdown');
+
+  iconBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    dropdown.classList.toggle('open');
+    iconBtn.classList.toggle('active', dropdown.classList.contains('open'));
+  });
+  document.addEventListener('click', () => {
+    dropdown.classList.remove('open');
+    iconBtn.classList.remove('active');
+  }, { capture: true, once: false });
+
+  const grid = document.createElement('div');
+  grid.className = 'photos-grid';
+  pane.appendChild(grid);
+
+  function sortedDocs(mode) {
+    const arr = [...docs];
+    if (mode === 'likes')  arr.sort((a, b) => (b.data().likeCount || 0) - (a.data().likeCount || 0));
+    if (mode === 'year')   arr.sort((a, b) => (b.data().year || 0) - (a.data().year || 0));
+    if (mode === 'recent') arr.sort((a, b) => {
+      const ta = a.data().uploadedAt?.toMillis?.() ?? 0;
+      const tb = b.data().uploadedAt?.toMillis?.() ?? 0;
+      return tb - ta;
+    });
+    return arr;
+  }
+
+  function renderCards(mode) {
+    grid.innerHTML = '';
+    const sorted = sortedDocs(mode);
+    sorted.forEach((doc, idx) => {
+      const d      = doc.data();
+      const liked  = hasLiked(doc.id);
+      const byline = [d.contributorName, d.year].filter(Boolean).join(', ');
+      const card   = document.createElement('div');
+      card.className = 'photo-card';
+      card.innerHTML = `
+        <img src="${escHtml(d.storageURL)}" alt="${escHtml(d.description || '')}" loading="lazy" style="cursor:zoom-in">
+        ${d.description ? `<div class="photo-desc">${escHtml(d.description)}</div>` : ''}
+        <div class="photo-meta">
+          <span class="photo-byline">${escHtml(byline)}</span>
+          <button class="like-btn${liked ? ' liked' : ''}" data-doc-id="${doc.id}"${liked ? ' disabled' : ''}>
+            &#9829; <span class="like-count">${d.likeCount || 0}</span>
+          </button>
+        </div>`;
+      card.querySelector('img').addEventListener('click', () => openLightbox(sorted, idx));
+      const likeBtn = card.querySelector('.like-btn:not([disabled])');
+      if (likeBtn) likeBtn.addEventListener('click', function() { likePhoto(this); });
+      grid.appendChild(card);
+    });
+  }
+
+  toolbar.querySelectorAll('.sort-option').forEach(opt => {
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
+      currentSort = opt.dataset.sort;
+      toolbar.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      dropdown.classList.remove('open');
+      iconBtn.classList.remove('active');
+      renderCards(currentSort);
+    });
+  });
+
+  renderCards('likes');
+}
+
+async function likePhoto(btn) {
+  const docId = btn.dataset.docId;
+  if (hasLiked(docId)) return;
+  btn.disabled = true;
+  btn.classList.add('liked');
+  try {
+    await db.collection('photos').doc(docId).update({
+      likeCount: firebase.firestore.FieldValue.increment(1),
+    });
+    markLiked(docId);
+    const countEl = btn.querySelector('.like-count');
+    countEl.textContent = parseInt(countEl.textContent, 10) + 1;
+  } catch (e) {
+    console.error('Like failed:', e);
+    btn.disabled = false;
+    btn.classList.remove('liked');
+  }
+}
+
+function hasLiked(docId) {
+  return JSON.parse(localStorage.getItem('savanna_liked_photos') || '[]').includes(docId);
+}
+
+function markLiked(docId) {
+  const liked = JSON.parse(localStorage.getItem('savanna_liked_photos') || '[]');
+  liked.push(docId);
+  localStorage.setItem('savanna_liked_photos', JSON.stringify(liked));
 }
 
 // ===== SIDE PANEL =====
 async function openPanel(siteId) {
+  // Mutually exclusive with year panel
+  closeYearPanel();
+
   selectedSiteId = siteId;
   const site = sites.find(s => s.id === siteId);
   if (!site) return;
@@ -562,14 +702,7 @@ async function openPanel(siteId) {
 
   renderPanelHeader(site);
   renderOverview(site);
-
-  // Load both CSVs in parallel before rendering (so descriptions are ready)
-  const [photosCsv, sketchesCsv] = await Promise.all([
-    loadMediaCsv(siteId, 'photos'),
-    loadMediaCsv(siteId, 'sketches'),
-  ]);
-  renderMedia(site, 'photos',   photosCsv);
-  renderMedia(site, 'sketches', sketchesCsv);
+  renderPhotosTab(siteId);
 
   switchTab('overview');
   document.getElementById('side-panel').classList.add('open');
@@ -629,51 +762,6 @@ function renderOverview(site) {
     ${yearRows}
   `;
 }
-
-// ===== MEDIA TABS =====
-function renderMedia(site, type, csvMap) {
-  const tabId     = type === 'photos' ? 'tab-photos' : 'tab-sketches';
-  const cellClass = type === 'photos' ? 'photo-cell' : 'sketch-cell';
-
-  const sorted = [...site.visits].sort((a, b) => a.year - b.year);
-  let cells = '';
-
-  for (const visit of sorted) {
-    const items = visit[type] || [];
-    for (const src of items) {
-      const filename    = src.split('/').pop();
-      const meta        = csvMap ? csvMap.get(filename) : null;
-      const description = meta?.description || '';
-      const labelLines  = [String(visit.year)];
-      if (description) labelLines.push(escHtml(description));
-      cells += `
-        <div class="media-cell ${cellClass}">
-          <img src="${escHtml(src)}" alt="${escHtml(site.name)} ${visit.year}" loading="lazy"
-               onclick="openLightbox('${escHtml(src)}')">
-          <div class="media-hover-label">${labelLines.join('<br>')}</div>
-        </div>
-      `;
-    }
-  }
-
-  const label = type === 'photos' ? 'photos' : 'sketches';
-  document.getElementById(tabId).innerHTML = cells
-    ? `<div class="media-grid">${cells}</div>`
-    : `<p class="media-empty">No ${label} added yet.</p>`;
-}
-
-// ===== LIGHTBOX =====
-function openLightbox(src) {
-  const lb  = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  img.src = src;
-  lb.classList.add('visible');
-}
-
-document.getElementById('lightbox').addEventListener('click', () => {
-  document.getElementById('lightbox').classList.remove('visible');
-  document.getElementById('lightbox-img').src = '';
-});
 
 // ===== HELPERS =====
 function escHtml(str) {
@@ -949,9 +1037,7 @@ function stateFullName(abbr) {
 
 // ===== YEAR SUMMARY PANEL =====
 let yearSummaries = null;
-let slideshowTimer = null;
-let slideshowIndex = 0;
-let slideshowPhotos = [];
+let lbCurrentDocId = null;
 
 async function loadYearSummaries() {
   if (yearSummaries) return yearSummaries;
@@ -966,11 +1052,21 @@ async function loadYearSummaries() {
 }
 
 async function openYearPanel(year) {
-  const summaries = await loadYearSummaries();
-  const data = summaries[String(year)] || {};
+  // Mutually exclusive with site panel
+  document.getElementById('side-panel').classList.remove('open');
 
-  // Title
+  // Open immediately so the panel is visible regardless of async load time
+  document.getElementById('year-panel').classList.add('open');
   document.getElementById('yp-title').textContent = `${year} Traveling Savanna`;
+
+  let summaries, data;
+  try {
+    summaries = await loadYearSummaries();
+    data = summaries[String(year)] || {};
+  } catch (e) {
+    console.error('openYearPanel: loadYearSummaries failed:', e);
+    data = {};
+  }
 
   // Trips & destinations
   const tripsEl = document.getElementById('yp-trips');
@@ -1023,46 +1119,163 @@ async function openYearPanel(year) {
     ? ecosL2.map(e => `<span class="yp-eco-tag yp-eco-tag-l2">${titleCase(e)}</span>`).join('')
     : '<span class="yp-placeholder">No ecoregion data.</span>';
 
-  // Photos slideshow
-  stopSlideshow();
-  slideshowPhotos = data.photos || [];
-  const slideshowEl = document.getElementById('yp-slideshow');
-  const noPhotosEl  = document.getElementById('yp-no-photos');
-  if (slideshowPhotos.length > 0) {
-    slideshowEl.classList.add('active');
-    noPhotosEl.style.display = 'none';
-    slideshowIndex = 0;
-    showSlide(0);
-    if (slideshowPhotos.length > 1) startSlideshow();
-  } else {
-    slideshowEl.classList.remove('active');
-    noPhotosEl.style.display = '';
-  }
-
-  document.getElementById('year-panel').classList.add('open');
+  // Photo strip — load from Firestore (non-blocking, panel already open)
+  buildYearStrip(year).catch(e => console.warn('Year strip failed:', e));
 }
 
 function closeYearPanel() {
-  stopSlideshow();
   document.getElementById('year-panel').classList.remove('open');
 }
 
-function showSlide(idx) {
-  const img = document.getElementById('yp-slide-img');
-  const counter = document.getElementById('yp-slide-counter');
-  img.src = slideshowPhotos[idx];
-  counter.textContent = `${idx + 1} / ${slideshowPhotos.length}`;
+async function buildYearStrip(year) {
+  const wrap     = document.getElementById('yp-strip-wrap');
+  const noPhotos = document.getElementById('yp-no-photos');
+
+  wrap.classList.remove('active');
+  wrap.innerHTML = '';
+  noPhotos.style.display = 'none';
+
+  let docs = [];
+  try {
+    const snap = await db.collection('photos')
+      .where('status', '==', 'approved')
+      .where('year', '==', Number(year))
+      .get();
+    docs = snap.docs;
+  } catch (e) {
+    console.warn('Year strip Firestore query failed:', e);
+  }
+
+  if (docs.length === 0) {
+    noPhotos.style.display = '';
+    return;
+  }
+
+  wrap.classList.add('active');
+
+  const PAGE_SIZE  = 6;
+  const totalPages = Math.ceil(docs.length / PAGE_SIZE);
+  let page = 0;
+
+  const grid = document.createElement('div');
+  grid.className = 'yp-photo-grid';
+  wrap.appendChild(grid);
+
+  const nav = document.createElement('div');
+  nav.className = 'yp-strip-nav';
+  nav.innerHTML = `
+    <button class="yp-nav-btn" id="yp-prev">&#8249;</button>
+    <span class="yp-page-count"></span>
+    <button class="yp-nav-btn" id="yp-next">&#8250;</button>
+  `;
+  if (totalPages > 1) wrap.appendChild(nav);
+
+  const prevBtn    = nav.querySelector('#yp-prev');
+  const nextBtn    = nav.querySelector('#yp-next');
+  const pageCount  = nav.querySelector('.yp-page-count');
+
+  function renderPage() {
+    grid.innerHTML = '';
+    const start = page * PAGE_SIZE;
+    docs.slice(start, start + PAGE_SIZE).forEach((doc, i) => {
+      const d  = doc.data();
+      const el = document.createElement('div');
+      el.className = 'yp-strip-item';
+      el.innerHTML = `<img src="${escHtml(d.storageURL)}" alt="${escHtml(d.description || '')}" loading="lazy">`;
+      el.addEventListener('click', () => openLightbox(docs, start + i));
+      grid.appendChild(el);
+    });
+    if (totalPages > 1) {
+      prevBtn.disabled    = page === 0;
+      nextBtn.disabled    = page >= totalPages - 1;
+      pageCount.textContent = `${page + 1} / ${totalPages}`;
+    }
+  }
+
+  prevBtn.addEventListener('click', () => { if (page > 0)               { page--; renderPage(); } });
+  nextBtn.addEventListener('click', () => { if (page < totalPages - 1)  { page++; renderPage(); } });
+
+  renderPage();
 }
 
-function startSlideshow() {
-  slideshowTimer = setInterval(() => {
-    slideshowIndex = (slideshowIndex + 1) % slideshowPhotos.length;
-    showSlide(slideshowIndex);
-  }, 2000);
+// ── Lightbox with prev / next navigation ────────────────────────────────────
+let lbDocs  = [];   // current photo list (Firestore docs)
+let lbIndex = 0;    // current position in lbDocs
+
+function openLightbox(docs, startIndex) {
+  lbDocs  = docs;
+  lbIndex = startIndex;
+  renderLightboxSlide();
 }
 
-function stopSlideshow() {
-  if (slideshowTimer) { clearInterval(slideshowTimer); slideshowTimer = null; }
+function renderLightboxSlide() {
+  const doc  = lbDocs[lbIndex];
+  const d    = doc.data();
+  lbCurrentDocId = doc.id;
+
+  document.getElementById('lightbox-img').src = d.storageURL || '';
+  document.getElementById('lb-description').textContent =
+    d.description || '';
+  document.getElementById('lb-contributor').textContent =
+    d.contributorName ? `📷 ${d.contributorName}` : '';
+  document.getElementById('lb-year').textContent =
+    [d.siteName, d.year].filter(Boolean).join(' · ');
+
+  const likeBtn   = document.getElementById('lb-like-btn');
+  const likeCount = document.getElementById('lb-like-count');
+  likeCount.textContent = d.likeCount || 0;
+  const liked = hasLiked(doc.id);
+  likeBtn.classList.toggle('liked', liked);
+  likeBtn.disabled = liked;
+
+  document.getElementById('lb-prev').style.visibility =
+    lbIndex > 0 ? 'visible' : 'hidden';
+  document.getElementById('lb-next').style.visibility =
+    lbIndex < lbDocs.length - 1 ? 'visible' : 'hidden';
+
+  document.getElementById('lightbox').classList.add('visible');
 }
+
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('lightbox') ||
+      e.target === document.getElementById('lightbox-img')) {
+    document.getElementById('lightbox').classList.remove('visible');
+  }
+});
+
+document.getElementById('lightbox-close').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('visible');
+});
+
+document.getElementById('lb-prev').addEventListener('click', e => {
+  e.stopPropagation();
+  if (lbIndex > 0) { lbIndex--; renderLightboxSlide(); }
+});
+
+document.getElementById('lb-next').addEventListener('click', e => {
+  e.stopPropagation();
+  if (lbIndex < lbDocs.length - 1) { lbIndex++; renderLightboxSlide(); }
+});
+
+document.getElementById('lb-like-btn').addEventListener('click', async (e) => {
+  e.stopPropagation();
+  const docId = lbCurrentDocId;
+  if (!docId || hasLiked(docId)) return;
+  const btn = document.getElementById('lb-like-btn');
+  btn.disabled = true;
+  btn.classList.add('liked');
+  try {
+    await db.collection('photos').doc(docId).update({
+      likeCount: firebase.firestore.FieldValue.increment(1),
+    });
+    markLiked(docId);
+    const el = document.getElementById('lb-like-count');
+    el.textContent = parseInt(el.textContent, 10) + 1;
+  } catch (e) {
+    console.error('Like failed:', e);
+    btn.disabled = false;
+    btn.classList.remove('liked');
+  }
+});
 
 document.getElementById('close-year-panel').addEventListener('click', closeYearPanel);
