@@ -1052,11 +1052,15 @@ async function loadYearSummaries() {
 }
 
 async function openYearPanel(year) {
+  const sidePanel = document.getElementById('side-panel');
+  const yearPanel = document.getElementById('year-panel');
+  if (!yearPanel) { console.error('year-panel element not found'); return; }
+
   // Mutually exclusive with site panel
-  document.getElementById('side-panel').classList.remove('open');
+  sidePanel?.classList.remove('open');
 
   // Open immediately so the panel is visible regardless of async load time
-  document.getElementById('year-panel').classList.add('open');
+  yearPanel.classList.add('open');
   document.getElementById('yp-title').textContent = `${year} Traveling Savanna`;
 
   let summaries, data;
