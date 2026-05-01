@@ -1155,12 +1155,55 @@ function closeYearPanel() {
 }
 
 function setupMobilePanels() {
-  document.getElementById('side-panel-handle').addEventListener('click', () => {
-    document.getElementById('side-panel').classList.toggle('expanded');
-  });
-  document.getElementById('year-panel-handle').addEventListener('click', () => {
-    document.getElementById('year-panel').classList.toggle('expanded');
-  });
+  attachPanelDrag('side-panel', 'side-panel-handle');
+  attachPanelDrag('year-panel', 'year-panel-handle');
+}
+
+function attachPanelDrag(panelId, handleId) {
+  const panel  = document.getElementById(panelId);
+  const handle = document.getElementById(handleId);
+  if (!panel || !handle) return;
+
+  const SNAP_LOW  = () => window.innerHeight * 0.48;
+  const SNAP_HIGH = () => window.innerHeight * 0.90;
+  const DRAG_THRESHOLD = 8; // px — less than this is a tap
+
+  let startY   = 0;
+  let startH   = 0;
+  let moved    = false;
+
+  handle.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+    startH = panel.getBoundingClientRect().height;
+    moved  = false;
+    panel.style.transition = 'none';
+  }, { passive: true });
+
+  handle.addEventListener('touchmove', e => {
+    const dy = startY - e.touches[0].clientY; // positive = dragging up
+    if (Math.abs(dy) > DRAG_THRESHOLD) moved = true;
+    if (!moved) return;
+    const newH = Math.min(Math.max(startH + dy, window.innerHeight * 0.25), window.innerHeight * 0.95);
+    panel.style.height = newH + 'px';
+  }, { passive: true });
+
+  handle.addEventListener('touchend', e => {
+    panel.style.transition = ''; // restore CSS transition
+    if (!moved) {
+      // treat as tap — toggle expanded
+      panel.classList.toggle('expanded');
+      panel.style.height = '';
+      return;
+    }
+    // snap based on where we ended up
+    const currentH = panel.getBoundingClientRect().height;
+    if (currentH > window.innerHeight * 0.65) {
+      panel.classList.add('expanded');
+    } else {
+      panel.classList.remove('expanded');
+    }
+    panel.style.height = ''; // hand back to CSS
+  }, { passive: true });
 }
 
 async function buildYearStrip(year) {

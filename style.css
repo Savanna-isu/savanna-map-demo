@@ -853,6 +853,13 @@ body {
   #side-panel.expanded,
   #year-panel.expanded { height: 90vh; }
 
+  /* Ensure inner content scrolls on iOS */
+  #panel-body,
+  #year-panel-inner {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+  }
+
   /* Remove old desktop-style pill from panel-header on mobile */
   #panel-header::before { display: none; }
 }
