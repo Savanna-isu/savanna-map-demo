@@ -1222,8 +1222,10 @@ function renderLightboxSlide() {
     d.description || '';
   document.getElementById('lb-contributor').textContent =
     d.contributorName ? `📷 ${d.contributorName}` : '';
+  const lbSite = sites && d.siteId ? sites.find(s => s.id === d.siteId) : null;
+  const lbLocation = lbSite ? `${lbSite.name}, ${lbSite.state}` : (d.siteId || '');
   document.getElementById('lb-year').textContent =
-    [d.siteName, d.year].filter(Boolean).join(' · ');
+    [lbLocation, d.year].filter(Boolean).join(' · ');
 
   const likeBtn   = document.getElementById('lb-like-btn');
   const likeCount = document.getElementById('lb-like-count');
