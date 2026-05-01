@@ -9,9 +9,7 @@
 </head>
 <body>
 
-  <div id="map"></div>
-
-  <!-- Map title (top-right) -->
+  <!-- Map title — must come before #map so it appears at the top on mobile -->
   <div id="map-title">The places we've gone!</div>
   <div id="map-subtitle">This map traces the places we have explored together through the Savanna Program since 2000. Browse by year, visit frequency, most recent visit, or ecological region to discover how our collective field experience has grown over time.</div>
 
@@ -47,11 +45,10 @@
         <option value="2024">2024</option>
         <option value="2025">2025</option>
       </select>
-      <button id="mob-lodging-btn" class="mob-filter-btn">Lodging</button>
-      <button id="mob-freq-btn"    class="mob-filter-btn">Frequency</button>
-      <button id="mob-recency-btn" class="mob-filter-btn">Recency</button>
     </div>
   </div>
+
+  <div id="map"></div>
 
   <!-- Footer (bottom-right) -->
   <div id="map-footer">

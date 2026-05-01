@@ -423,22 +423,13 @@ function removeLodgingIcons() {
   });
 }
 
-function syncMobileButtons() {
-  document.getElementById('mob-lodging-btn')?.classList.toggle('active', lodgingVisible);
-  document.getElementById('mob-freq-btn')?.classList.toggle('active',    colorMode === 'frequency');
-  document.getElementById('mob-recency-btn')?.classList.toggle('active', colorMode === 'recency');
-}
-
 function setupLodgingToggle() {
-  const handler = () => {
+  document.getElementById('lodging-btn').addEventListener('click', () => {
     lodgingVisible = !lodgingVisible;
     document.getElementById('lodging-btn').classList.toggle('active', lodgingVisible);
     document.getElementById('lodging-legend').style.display = lodgingVisible ? 'flex' : 'none';
     if (lodgingVisible) { applyLodgingIcons(activeYear); } else { removeLodgingIcons(); }
-    syncMobileButtons();
-  };
-  document.getElementById('lodging-btn').addEventListener('click', handler);
-  document.getElementById('mob-lodging-btn')?.addEventListener('click', handler);
+  });
 }
 
 // ===== COLOR MODE TOGGLE (default / frequency / recency) =====
@@ -474,7 +465,7 @@ function applyColorMode(mode) {
 }
 
 function setupFrequencyToggle() {
-  const handler = () => {
+  document.getElementById('frequency-btn').addEventListener('click', () => {
     const turningOn = colorMode !== 'frequency';
     colorMode = turningOn ? 'frequency' : 'default';
     document.getElementById('frequency-btn').classList.toggle('active', turningOn);
@@ -482,14 +473,11 @@ function setupFrequencyToggle() {
     document.getElementById('frequency-legend').style.display = turningOn ? 'flex' : 'none';
     document.getElementById('recency-legend').style.display = 'none';
     applyColorMode(colorMode);
-    syncMobileButtons();
-  };
-  document.getElementById('frequency-btn').addEventListener('click', handler);
-  document.getElementById('mob-freq-btn')?.addEventListener('click', handler);
+  });
 }
 
 function setupColorModeToggle() {
-  const handler = () => {
+  document.getElementById('color-mode-btn').addEventListener('click', () => {
     const turningOn = colorMode !== 'recency';
     colorMode = turningOn ? 'recency' : 'default';
     document.getElementById('color-mode-btn').classList.toggle('active', turningOn);
@@ -497,10 +485,7 @@ function setupColorModeToggle() {
     document.getElementById('recency-legend').style.display = turningOn ? 'flex' : 'none';
     document.getElementById('frequency-legend').style.display = 'none';
     applyColorMode(colorMode);
-    syncMobileButtons();
-  };
-  document.getElementById('color-mode-btn').addEventListener('click', handler);
-  document.getElementById('mob-recency-btn')?.addEventListener('click', handler);
+  });
 }
 
 function applyYearFilter(raw) {

@@ -705,9 +705,7 @@ body {
     overflow: hidden;
   }
 
-  /* Title bar: order 1 */
   #map-title {
-    order: 1;
     position: static;
     width: 100%;
     border-radius: 0;
@@ -721,9 +719,7 @@ body {
     box-shadow: none;
   }
 
-  /* Mobile controls bar: order 2 */
   #mobile-controls {
-    order: 2;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -766,29 +762,7 @@ body {
     min-width: 90px;
   }
 
-  .mob-filter-btn {
-    flex-shrink: 0;
-    padding: 5px 10px;
-    border: 1.5px solid #C8B898;
-    border-radius: 3px;
-    background: rgba(245,240,232,0.92);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    color: #5C4A30;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-  }
-  .mob-filter-btn.active {
-    background: #5C4A30;
-    color: #F5F0E8;
-    border-color: #5C4A30;
-  }
-
-  /* Map: order 3, fills remaining height */
   #map {
-    order: 3;
     position: relative;
     inset: auto;
     width: 100%;
