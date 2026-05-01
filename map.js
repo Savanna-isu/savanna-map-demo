@@ -194,6 +194,7 @@ map.on('load', async () => {
   setupColorModeToggle();
   setupEcoButtons();
   setupBasemapToggle();
+  setupMobilePanels();
 });
 
 // ===== ROUTES =====
@@ -729,7 +730,9 @@ async function openPanel(siteId) {
 function closePanel() {
   selectedSiteId = null;
   setMarkerSelected(null);
-  document.getElementById('side-panel').classList.remove('open');
+  const p = document.getElementById('side-panel');
+  p.classList.remove('open');
+  p.classList.remove('expanded');
 }
 
 document.getElementById('close-panel').addEventListener('click', closePanel);
@@ -1146,7 +1149,18 @@ async function openYearPanel(year) {
 }
 
 function closeYearPanel() {
-  document.getElementById('year-panel').classList.remove('open');
+  const p = document.getElementById('year-panel');
+  p.classList.remove('open');
+  p.classList.remove('expanded');
+}
+
+function setupMobilePanels() {
+  document.getElementById('side-panel-handle').addEventListener('click', () => {
+    document.getElementById('side-panel').classList.toggle('expanded');
+  });
+  document.getElementById('year-panel-handle').addEventListener('click', () => {
+    document.getElementById('year-panel').classList.toggle('expanded');
+  });
 }
 
 async function buildYearStrip(year) {

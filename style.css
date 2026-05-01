@@ -799,23 +799,43 @@ body {
   /* Eco + basemap buttons: anchor to bottom of map */
   #eco-controls { bottom: 32px; }
 
-  /* Year panel: full-width slide-in */
-  #year-panel { top: 0; width: 100vw; }
-
-  /* Side panel: slides up from bottom edge */
-  #side-panel {
-    top: auto;
-    bottom: 0;
-    left: 0; right: 0;
-    width: 100%; height: 70vh;
-    border-left: none; border-top: 1px solid #C8B898;
-    transform: translateY(100%); border-radius: 10px 10px 0 0;
+  /* ── Mobile drag handle (tap to expand) ── */
+  .mob-handle {
+    width: 100%;
+    padding: 10px 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
   }
-  #side-panel.open { transform: translateY(0); }
-
-  #panel-header::before {
-    content: ''; display: block;
+  .mob-handle::after {
+    content: '';
+    display: block;
     width: 36px; height: 4px;
-    background: #C8B898; border-radius: 2px; margin: 0 auto 12px;
+    background: #C8B898; border-radius: 2px;
   }
+
+  /* ── Both panels: bottom sheet ── */
+  #side-panel,
+  #year-panel {
+    top: auto;
+    right: 0; left: 0; bottom: 0;
+    width: 100%;
+    height: 48vh;
+    border-left: none;
+    border-top: 1px solid #C8B898;
+    border-radius: 10px 10px 0 0;
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.4,0,0.2,1),
+                height 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  #side-panel.open,
+  #year-panel.open  { transform: translateY(0); }
+
+  #side-panel.expanded,
+  #year-panel.expanded { height: 90vh; }
+
+  /* Remove old desktop-style pill from panel-header on mobile */
+  #panel-header::before { display: none; }
 }
