@@ -40,16 +40,17 @@ function _docToStory(doc) {
   const d = doc.data();
   // Convert Firestore Timestamps to JS Date for convenience
   return {
-    id:          doc.id,
-    siteId:      d.siteId,
-    siteName:    d.siteName,
-    year:        d.year,
-    alumniName:  d.alumniName,
-    story:       d.story,
-    photoUrls:   d.photoUrls || [],
-    status:      d.status,
-    submittedAt: d.submittedAt?.toDate?.() ?? null,
-    reviewedAt:  d.reviewedAt?.toDate?.() ?? null,
+    id:               doc.id,
+    siteId:           d.siteId,
+    siteName:         d.siteName,
+    year:             d.year,
+    alumniName:       d.alumniName,
+    contributorRole:  d.contributorRole || '',
+    story:            d.story,
+    photoUrls:        d.photoUrls || [],
+    status:           d.status,
+    submittedAt:      d.submittedAt?.toDate?.() ?? null,
+    reviewedAt:       d.reviewedAt?.toDate?.() ?? null,
     // alumniEmail intentionally omitted from returned objects (kept server-side only)
   };
 }
@@ -63,13 +64,14 @@ function _docToStory(doc) {
  * @param {string}   data.siteId       - e.g. "new-orleans-la"
  * @param {string}   data.siteName     - human-readable site name
  * @param {number}   data.year         - year of the visit
- * @param {string}   data.alumniName   - submitter's name (shown publicly)
- * @param {string}   data.alumniEmail  - submitter's email (kept private)
- * @param {string}   data.story        - the story text
- * @param {File[]}   [data.photos]     - optional photo File objects from <input type="file">
+ * @param {string}   data.alumniName       - submitter's name (shown publicly)
+ * @param {string}   data.alumniEmail      - submitter's email (kept private)
+ * @param {string}   data.contributorRole  - "Alumni" | "Current Student" | "Faculty / Staff"
+ * @param {string}   data.story            - the story text
+ * @param {File[]}   [data.photos]         - optional photo File objects from <input type="file">
  * @returns {Promise<string>} the new Firestore document ID
  */
-async function submitStory({ siteId, siteName, year, alumniName, alumniEmail, story, photos = [] }) {
+async function submitStory({ siteId, siteName, year, alumniName, alumniEmail, contributorRole, story, photos = [] }) {
   const id = _db.collection('submissions').doc().id;
 
   const photoUrls = await Promise.all(photos.map(f => _uploadPhoto(id, f)));
@@ -77,13 +79,14 @@ async function submitStory({ siteId, siteName, year, alumniName, alumniEmail, st
   await _db.collection('submissions').doc(id).set({
     siteId,
     siteName,
-    year:        Number(year),
-    alumniName:  alumniName.trim(),
-    alumniEmail: alumniEmail.trim().toLowerCase(),
-    story:       story.trim(),
+    year:             Number(year),
+    alumniName:       alumniName.trim(),
+    alumniEmail:      alumniEmail.trim().toLowerCase(),
+    contributorRole:  contributorRole || '',
+    story:            story.trim(),
     photoUrls,
-    status:      'pending',
-    submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    status:           'pending',
+    submittedAt:      firebase.firestore.FieldValue.serverTimestamp(),
   });
 
   return id;

@@ -138,6 +138,34 @@
     }
     textarea { resize: vertical; line-height: 1.55; }
 
+    /* ── Role selector ── */
+    .role-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+    .role-group input[type="radio"] { display: none; }
+    .role-group label {
+      display: inline-block;
+      margin: 0;
+      padding: 7px 18px;
+      border: 1px solid #C8B898;
+      border-radius: 20px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #5C4A30;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .role-group input[type="radio"]:checked + label {
+      background: #5C4A30;
+      color: #fff;
+      border-color: #5C4A30;
+    }
+    .role-group label:hover { border-color: #8A7A68; }
+
     /* ── Photo upload ── */
     .upload-area {
       border: 2px dashed #C8B898;
@@ -286,6 +314,18 @@
       <div>
         <label for="alumni-email">Email <span class="optional">(not shown publicly)</span></label>
         <input type="email" id="alumni-email" placeholder="you@example.com" required>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Your role</label>
+      <div class="role-group">
+        <input type="radio" name="contributor-role" id="role-alumni" value="Alumni">
+        <label for="role-alumni">Alumni</label>
+        <input type="radio" name="contributor-role" id="role-student" value="Current Student">
+        <label for="role-student">Current Student</label>
+        <input type="radio" name="contributor-role" id="role-faculty" value="Faculty / Staff">
+        <label for="role-faculty">Faculty / Staff</label>
       </div>
     </div>
 
@@ -494,6 +534,7 @@
   async function handleSubmit() {
     const name    = document.getElementById('alumni-name').value.trim();
     const email   = document.getElementById('alumni-email').value.trim();
+    const roleEl  = document.querySelector('input[name="contributor-role"]:checked');
     const siteId  = document.getElementById('site-select').value;
     const year    = document.getElementById('year-select').value;
     const story   = document.getElementById('story-text').value.trim();
@@ -501,6 +542,7 @@
     // Basic validation
     if (!name)    return showStatus('Please enter your name.', 'error');
     if (!email || !email.includes('@')) return showStatus('Please enter a valid email address.', 'error');
+    if (!roleEl)  return showStatus('Please select your role (Alumni, Current Student, or Faculty / Staff).', 'error');
     if (!siteId)  return showStatus('Please select a site.', 'error');
     if (!year)    return showStatus('Please select a year.', 'error');
     if (!story)   return showStatus('Please write something before submitting.', 'error');
@@ -516,12 +558,13 @@
     try {
       await submitStory({
         siteId,
-        siteName:    site.name,
-        year:        Number(year),
-        alumniName:  name,
-        alumniEmail: email,
+        siteName:         site.name,
+        year:             Number(year),
+        alumniName:       name,
+        alumniEmail:      email,
+        contributorRole:  roleEl.value,
         story,
-        photos:      selectedFiles,
+        photos:           selectedFiles,
       });
 
       progress.style.display = 'none';
@@ -533,6 +576,7 @@
       // Reset form
       document.getElementById('alumni-name').value    = '';
       document.getElementById('alumni-email').value   = '';
+      document.querySelectorAll('input[name="contributor-role"]').forEach(r => r.checked = false);
       document.getElementById('site-select').value    = '';
       document.getElementById('year-select').innerHTML = '<option value="">Select a site first</option>';
       document.getElementById('story-text').value     = '';
