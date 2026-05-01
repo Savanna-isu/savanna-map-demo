@@ -736,7 +736,8 @@ body {
     color: #C8102E;
     font-size: 12px;
     font-weight: 700;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     letter-spacing: 0.02em;
   }
 
@@ -791,7 +792,23 @@ body {
   }
 
   /* Hide desktop-only elements on mobile */
-  #map-subtitle   { display: none; }
+  #map-subtitle {
+    position: static;
+    width: 100%;
+    max-width: none;
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: none;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(200,184,152,0.5);
+    padding: 5px 14px 6px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #5C4A30;
+    flex-shrink: 0;
+    box-shadow: none;
+    pointer-events: none;
+  }
   #map-footer     { display: none; }
   #year-filters   { display: none; }
   #lodging-control { display: none; }
