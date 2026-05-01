@@ -95,9 +95,7 @@
       border-bottom: 1px solid #C8B898;
     }
 
-    .field-group {
-      margin-bottom: 18px;
-    }
+    .field-group { margin-bottom: 18px; }
     .field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -166,66 +164,118 @@
     }
     .role-group label:hover { border-color: #8A7A68; }
 
-    /* ── Photo upload ── */
-    .upload-area {
-      border: 2px dashed #C8B898;
-      border-radius: 6px;
-      background: #fff;
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .upload-area:hover, .upload-area.drag-over {
-      border-color: #8A7A68;
-      background: #F5F0E8;
-    }
-    .upload-area input[type="file"] { display: none; }
-    .upload-area .upload-icon { font-size: 2rem; margin-bottom: 8px; }
-    .upload-area p { font-size: 0.85rem; color: #8A7A68; line-height: 1.5; }
-    .upload-area strong { color: #5C4A30; }
-
-    #photo-previews {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .preview-thumb {
-      position: relative;
-      width: 80px;
-      height: 80px;
-    }
-    .preview-thumb img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 4px;
-      border: 1px solid #C8B898;
-    }
-    .preview-thumb .remove-photo {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      width: 18px;
-      height: 18px;
-      background: #C8102E;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      font-size: 11px;
-      line-height: 18px;
-      text-align: center;
-      cursor: pointer;
-      padding: 0;
-    }
-
     /* ── Divider ── */
     .divider {
       border: none;
       border-top: 1px solid #C8B898;
       margin: 24px 0;
     }
+
+    /* ── Story blocks ── */
+    #story-blocks { display: flex; flex-direction: column; gap: 16px; }
+
+    .story-block {
+      border: 1px solid #C8B898;
+      border-radius: 7px;
+      padding: 18px 18px 16px;
+      background: #fff;
+    }
+
+    .story-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .story-block-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8A7A68;
+    }
+    .remove-story-btn {
+      background: none;
+      border: 1px solid #C8B898;
+      border-radius: 4px;
+      color: #8A7A68;
+      font-size: 0.78rem;
+      padding: 3px 9px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .remove-story-btn:hover { color: #C8102E; border-color: #C8102E; }
+
+    /* ── Per-block photo upload ── */
+    .story-upload-area {
+      border: 2px dashed #C8B898;
+      border-radius: 6px;
+      background: #F5F0E8;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 14px;
+    }
+    .story-upload-area:hover,
+    .story-upload-area.drag-over { border-color: #8A7A68; background: #EDE8DE; }
+    .story-upload-area input[type="file"] { display: none; }
+    .story-upload-area .upload-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .story-upload-area p { font-size: 0.82rem; color: #8A7A68; }
+    .story-upload-area strong { color: #5C4A30; }
+
+    .story-photo-preview {
+      position: relative;
+      display: none;
+      margin-bottom: 14px;
+    }
+    .story-photo-preview img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #C8B898;
+      display: block;
+    }
+    .story-photo-preview .change-photo-btn {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(245,240,232,0.92);
+      border: 1px solid #C8B898;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: #5C4A30;
+      padding: 3px 10px;
+      cursor: pointer;
+    }
+
+    /* ── Word counter ── */
+    .word-count {
+      text-align: right;
+      font-size: 0.78rem;
+      color: #8A7A68;
+      margin-top: 4px;
+    }
+    .word-count.over { color: #B71C1C; font-weight: 700; }
+
+    /* ── Add story button ── */
+    #add-story-btn {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 11px;
+      background: #fff;
+      color: #5C4A30;
+      border: 1.5px dashed #C8B898;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    #add-story-btn:hover { border-color: #8A7A68; background: #F5F0E8; }
+    #add-story-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* ── Submit button ── */
     .submit-btn {
@@ -299,7 +349,7 @@
 <div class="page">
 
   <div class="intro">
-    <strong>We want to hear from you.</strong> If you traveled with the Savanna Studio program, share a memory, reflection, or photo from your trip. Submissions are reviewed before appearing on the map.
+    <strong>We want to hear from you.</strong> If you traveled with the Savanna Studio program, share a memory, reflection, or photo from your trip. Each entry is one photo and a brief story (max 200 words). You can add up to 5 entries per submission. Submissions are reviewed before appearing on the map.
   </div>
 
   <div class="form-card">
@@ -348,31 +398,15 @@
     </div>
 
     <hr class="divider">
-    <p class="form-section-title">Your story</p>
+    <p class="form-section-title">Your stories</p>
 
-    <div class="field-group">
-      <label for="story-text">What do you remember? <span class="optional">(max 2000 characters)</span></label>
-      <textarea id="story-text" rows="7" maxlength="2000"
-        placeholder="Share a memory, reflection, or observation from this place…"></textarea>
-      <div style="text-align:right; font-size:0.78rem; color:#8A7A68; margin-top:4px;">
-        <span id="char-count">0</span> / 2000
-      </div>
-    </div>
+    <div id="story-blocks"></div>
 
-    <hr class="divider">
-    <p class="form-section-title">Photos <span style="font-weight:400;text-transform:none;font-size:0.8rem;color:#8A7A68"> — optional, up to 3 images (JPG/PNG, max 10 MB each)</span></p>
+    <button type="button" id="add-story-btn" onclick="addStoryBlock()">+ Add another story</button>
 
-    <div class="upload-area" id="upload-area" onclick="document.getElementById('photo-input').click()">
-      <div class="upload-icon">📷</div>
-      <p><strong>Click to choose photos</strong> or drag and drop here</p>
-      <p>JPG or PNG · up to 3 files · 10 MB each</p>
-      <input type="file" id="photo-input" accept="image/jpeg,image/png" multiple>
-    </div>
-    <div id="photo-previews"></div>
+    <div id="upload-progress">Uploading and saving your stories…</div>
 
-    <div id="upload-progress">Uploading photos and saving your story…</div>
-
-    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Submit My Story</button>
+    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Submit</button>
 
     <div id="status-msg"></div>
 
@@ -387,7 +421,11 @@
 <script src="firebase-api.js"></script>
 
 <script>
-  // ── Load sites into dropdowns ─────────────────────────────────────────────
+  // ── Constants ─────────────────────────────────────────────────────────────
+
+  const MAX_BLOCKS  = 5;
+  const MAX_WORDS   = 200;
+  const MAX_SIZE    = 10 * 1024 * 1024; // 10 MB
 
   const STATE_NAMES = {
     AR:'Arkansas', CO:'Colorado', GA:'Georgia', IA:'Iowa', IL:'Illinois',
@@ -398,29 +436,24 @@
     WI:'Wisconsin', WY:'Wyoming',
   };
 
-  let sitesData = [];
-  let selectedFiles = [];
+  let sitesData  = [];
+  let blockSeq   = 0; // ever-increasing ID, never reused
+
+  // ── Site / year dropdowns ─────────────────────────────────────────────────
 
   async function loadSites() {
     try {
       const resp = await fetch('data/sites.json');
       sitesData = await resp.json();
-
-      // Exclude Ames (home base, not a field trip destination)
       const fieldSites = sitesData.filter(s => s.id !== 'ames-ia');
-
-      // Sort by full state name, then site name within state
       fieldSites.sort((a, b) => {
         const sa = STATE_NAMES[a.state] || a.state;
         const sb = STATE_NAMES[b.state] || b.state;
         return sa !== sb ? sa.localeCompare(sb) : a.name.localeCompare(b.name);
       });
-
-      // Build grouped <optgroup> by state
       const sel = document.getElementById('site-select');
       sel.innerHTML = '<option value="">— Choose a site —</option>';
-      let currentState = null;
-      let group = null;
+      let currentState = null, group = null;
       for (const site of fieldSites) {
         const stateName = STATE_NAMES[site.state] || site.state;
         if (stateName !== currentState) {
@@ -456,74 +489,143 @@
     }
   });
 
-  // ── Character counter ─────────────────────────────────────────────────────
+  // ── Story block management ────────────────────────────────────────────────
 
-  document.getElementById('story-text').addEventListener('input', function () {
-    document.getElementById('char-count').textContent = this.value.length;
-  });
+  function countWords(text) {
+    return text.trim() ? text.trim().split(/\s+/).length : 0;
+  }
 
-  // ── Photo upload / preview ────────────────────────────────────────────────
+  function addStoryBlock() {
+    const container = document.getElementById('story-blocks');
+    const blocks    = container.querySelectorAll('.story-block');
+    if (blocks.length >= MAX_BLOCKS) return;
 
-  const MAX_PHOTOS = 3;
-  const MAX_SIZE   = 10 * 1024 * 1024; // 10 MB
+    const id  = `sb-${++blockSeq}`;
+    const num = blocks.length + 1;
 
-  function refreshPreviews() {
-    const container = document.getElementById('photo-previews');
-    container.innerHTML = '';
-    selectedFiles.forEach((file, i) => {
-      const url  = URL.createObjectURL(file);
-      const wrap = document.createElement('div');
-      wrap.className = 'preview-thumb';
-      wrap.innerHTML = `
-        <img src="${url}" alt="">
-        <button class="remove-photo" onclick="removePhoto(${i})" title="Remove">✕</button>
-      `;
-      container.appendChild(wrap);
+    const block = document.createElement('div');
+    block.className = 'story-block';
+    block.id = id;
+    block._file = null;
+
+    block.innerHTML = `
+      <div class="story-block-header">
+        <span class="story-block-label">Story ${num}</span>
+        <button type="button" class="remove-story-btn" onclick="removeBlock('${id}')">× Remove</button>
+      </div>
+      <div class="story-upload-area" id="ua-${id}">
+        <div class="upload-icon">📷</div>
+        <p><strong>Click to add a photo</strong> or drag and drop</p>
+        <p>JPG or PNG · max 10 MB</p>
+        <input type="file" accept="image/jpeg,image/png" id="fi-${id}">
+      </div>
+      <div class="story-photo-preview" id="pp-${id}">
+        <img src="" alt="" id="pi-${id}">
+        <button type="button" class="change-photo-btn" onclick="changePhoto('${id}')">Change photo</button>
+      </div>
+      <div class="field-group" style="margin-bottom:0">
+        <label>Your memory <span class="optional">(max ${MAX_WORDS} words)</span></label>
+        <textarea rows="5" id="ta-${id}"
+          placeholder="Share a memory, reflection, or observation from this place…"></textarea>
+        <div class="word-count" id="wc-${id}">0 / ${MAX_WORDS} words</div>
+      </div>
+    `;
+
+    container.appendChild(block);
+
+    // File input change
+    document.getElementById(`fi-${id}`).addEventListener('change', function () {
+      if (this.files[0]) setBlockPhoto(id, this.files[0]);
+      this.value = '';
+    });
+
+    // Upload area click
+    document.getElementById(`ua-${id}`).addEventListener('click', () => {
+      document.getElementById(`fi-${id}`).click();
+    });
+
+    // Drag and drop
+    const ua = document.getElementById(`ua-${id}`);
+    ua.addEventListener('dragover',  e => { e.preventDefault(); ua.classList.add('drag-over'); });
+    ua.addEventListener('dragleave', () => ua.classList.remove('drag-over'));
+    ua.addEventListener('drop', e => {
+      e.preventDefault();
+      ua.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) setBlockPhoto(id, file);
+    });
+
+    // Word counter
+    document.getElementById(`ta-${id}`).addEventListener('input', () => updateWordCount(id));
+
+    updateBlockNumbers();
+    updateAddBtn();
+  }
+
+  function removeBlock(id) {
+    const block = document.getElementById(id);
+    if (!block) return;
+    const container = document.getElementById('story-blocks');
+    if (container.querySelectorAll('.story-block').length <= 1) return;
+    block.remove();
+    updateBlockNumbers();
+    updateAddBtn();
+  }
+
+  function updateBlockNumbers() {
+    const blocks = document.getElementById('story-blocks').querySelectorAll('.story-block');
+    blocks.forEach((b, i) => {
+      b.querySelector('.story-block-label').textContent = `Story ${i + 1}`;
+      // Hide remove button when only one block remains
+      b.querySelector('.remove-story-btn').style.visibility =
+        blocks.length > 1 ? 'visible' : 'hidden';
     });
   }
 
-  function removePhoto(index) {
-    selectedFiles.splice(index, 1);
-    refreshPreviews();
+  function updateAddBtn() {
+    const count = document.getElementById('story-blocks').querySelectorAll('.story-block').length;
+    const btn   = document.getElementById('add-story-btn');
+    btn.disabled = count >= MAX_BLOCKS;
+    btn.textContent = count >= MAX_BLOCKS
+      ? `Maximum ${MAX_BLOCKS} stories reached`
+      : '+ Add another story';
   }
 
-  document.getElementById('photo-input').addEventListener('change', function () {
-    addFiles(Array.from(this.files));
-    this.value = ''; // reset so same file can be re-selected
-  });
+  // ── Per-block photo handling ──────────────────────────────────────────────
 
-  function addFiles(files) {
-    const errors = [];
-    for (const f of files) {
-      if (selectedFiles.length >= MAX_PHOTOS) {
-        errors.push(`Max ${MAX_PHOTOS} photos allowed.`);
-        break;
-      }
-      if (!['image/jpeg', 'image/png'].includes(f.type)) {
-        errors.push(`"${f.name}" is not a JPG or PNG.`);
-        continue;
-      }
-      if (f.size > MAX_SIZE) {
-        errors.push(`"${f.name}" exceeds 10 MB.`);
-        continue;
-      }
-      selectedFiles.push(f);
+  function setBlockPhoto(id, file) {
+    if (!['image/jpeg', 'image/png'].includes(file.type)) {
+      showStatus(`"${file.name}" is not a JPG or PNG.`, 'error');
+      return;
     }
-    if (errors.length) showStatus(errors.join(' '), 'error');
-    refreshPreviews();
+    if (file.size > MAX_SIZE) {
+      showStatus(`"${file.name}" exceeds 10 MB.`, 'error');
+      return;
+    }
+    const block = document.getElementById(id);
+    block._file = file;
+
+    const url = URL.createObjectURL(file);
+    document.getElementById(`pi-${id}`).src = url;
+    document.getElementById(`ua-${id}`).style.display = 'none';
+    document.getElementById(`pp-${id}`).style.display = 'block';
   }
 
-  // Drag-and-drop on upload area
-  const uploadArea = document.getElementById('upload-area');
-  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
-  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
-  uploadArea.addEventListener('drop', e => {
-    e.preventDefault();
-    uploadArea.classList.remove('drag-over');
-    addFiles(Array.from(e.dataTransfer.files));
-  });
+  function changePhoto(id) {
+    document.getElementById(`fi-${id}`).click();
+  }
 
-  // ── Submit ────────────────────────────────────────────────────────────────
+  // ── Word counter ──────────────────────────────────────────────────────────
+
+  function updateWordCount(id) {
+    const ta  = document.getElementById(`ta-${id}`);
+    const wc  = document.getElementById(`wc-${id}`);
+    const n   = countWords(ta.value);
+    wc.textContent = `${n} / ${MAX_WORDS} words`;
+    wc.classList.toggle('over', n > MAX_WORDS);
+  }
+
+  // ── Status message ────────────────────────────────────────────────────────
 
   function showStatus(msg, type) {
     const el = document.getElementById('status-msg');
@@ -531,64 +633,85 @@
     el.className = type;
   }
 
+  // ── Submit ────────────────────────────────────────────────────────────────
+
   async function handleSubmit() {
-    const name    = document.getElementById('alumni-name').value.trim();
-    const email   = document.getElementById('alumni-email').value.trim();
-    const roleEl  = document.querySelector('input[name="contributor-role"]:checked');
-    const siteId  = document.getElementById('site-select').value;
-    const year    = document.getElementById('year-select').value;
-    const story   = document.getElementById('story-text').value.trim();
+    const name   = document.getElementById('alumni-name').value.trim();
+    const email  = document.getElementById('alumni-email').value.trim();
+    const roleEl = document.querySelector('input[name="contributor-role"]:checked');
+    const siteId = document.getElementById('site-select').value;
+    const year   = document.getElementById('year-select').value;
 
-    // Basic validation
-    if (!name)    return showStatus('Please enter your name.', 'error');
-    if (!email || !email.includes('@')) return showStatus('Please enter a valid email address.', 'error');
-    if (!roleEl)  return showStatus('Please select your role (Alumni, Current Student, or Faculty / Staff).', 'error');
-    if (!siteId)  return showStatus('Please select a site.', 'error');
-    if (!year)    return showStatus('Please select a year.', 'error');
-    if (!story)   return showStatus('Please write something before submitting.', 'error');
+    if (!name)   return showStatus('Please enter your name.', 'error');
+    if (!email || !email.includes('@'))
+                 return showStatus('Please enter a valid email address.', 'error');
+    if (!roleEl) return showStatus('Please select your role.', 'error');
+    if (!siteId) return showStatus('Please select a site.', 'error');
+    if (!year)   return showStatus('Please select a year.', 'error');
 
-    const site = sitesData.find(s => s.id === siteId);
+    const blocks = Array.from(
+      document.getElementById('story-blocks').querySelectorAll('.story-block')
+    );
 
-    const btn = document.getElementById('submit-btn');
+    // Validate all blocks before submitting any
+    for (let i = 0; i < blocks.length; i++) {
+      const label = `Story ${i + 1}`;
+      const file  = blocks[i]._file;
+      const text  = document.getElementById(`ta-${blocks[i].id}`).value.trim();
+      const words = countWords(text);
+      if (!file)       return showStatus(`${label}: please add a photo.`, 'error');
+      if (!text)       return showStatus(`${label}: please write a story.`, 'error');
+      if (words > MAX_WORDS)
+        return showStatus(`${label}: ${words} words — please trim to ${MAX_WORDS} words.`, 'error');
+    }
+
+    const site     = sitesData.find(s => s.id === siteId);
+    const btn      = document.getElementById('submit-btn');
     const progress = document.getElementById('upload-progress');
     btn.disabled = true;
     progress.style.display = 'block';
     document.getElementById('status-msg').className = '';
 
+    let submitted = 0;
     try {
-      await submitStory({
-        siteId,
-        siteName:         site.name,
-        year:             Number(year),
-        alumniName:       name,
-        alumniEmail:      email,
-        contributorRole:  roleEl.value,
-        story,
-        photos:           selectedFiles,
-      });
+      for (const block of blocks) {
+        const text = document.getElementById(`ta-${block.id}`).value.trim();
+        await submitStory({
+          siteId,
+          siteName:        site.name,
+          year:            Number(year),
+          alumniName:      name,
+          alumniEmail:     email,
+          contributorRole: roleEl.value,
+          story:           text,
+          photos:          [block._file],
+        });
+        submitted++;
+      }
 
       progress.style.display = 'none';
+      const plural = submitted > 1 ? `${submitted} stories` : 'your story';
       showStatus(
-        'Thank you! Your story has been submitted and will appear on the map after review.',
+        `Thank you! We received ${plural}. ${submitted > 1 ? 'They' : 'It'} will appear on the map after review.`,
         'success'
       );
 
       // Reset form
-      document.getElementById('alumni-name').value    = '';
-      document.getElementById('alumni-email').value   = '';
+      document.getElementById('alumni-name').value = '';
+      document.getElementById('alumni-email').value = '';
       document.querySelectorAll('input[name="contributor-role"]').forEach(r => r.checked = false);
-      document.getElementById('site-select').value    = '';
+      document.getElementById('site-select').value = '';
       document.getElementById('year-select').innerHTML = '<option value="">Select a site first</option>';
-      document.getElementById('story-text').value     = '';
-      document.getElementById('char-count').textContent = '0';
-      selectedFiles = [];
-      refreshPreviews();
+      document.getElementById('story-blocks').innerHTML = '';
+      blockSeq = 0;
+      addStoryBlock();
 
     } catch (err) {
       console.error(err);
       progress.style.display = 'none';
+      const done = submitted > 0 ? ` (${submitted} of ${blocks.length} saved)` : '';
       showStatus(
-        'Submission failed: ' + (err.message || 'Unknown error. Please try again.'),
+        'Submission failed' + done + ': ' + (err.message || 'Unknown error. Please try again.'),
         'error'
       );
     } finally {
@@ -596,7 +719,10 @@
     }
   }
 
+  // ── Init ──────────────────────────────────────────────────────────────────
+
   loadSites();
+  addStoryBlock(); // start with one empty block
 </script>
 </body>
 </html>
