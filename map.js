@@ -508,6 +508,8 @@ function applyYearFilter(raw) {
   document.querySelectorAll('.filter-btn').forEach(b =>
     b.classList.toggle('active', b.dataset.year === raw)
   );
+  const mobSel = document.getElementById('mobile-year-select');
+  if (mobSel) mobSel.value = raw;
   setRouteVisibility(activeYear);
   setPinDimming(activeYear);
   if (lodgingVisible) { removeLodgingIcons(); applyLodgingIcons(activeYear); }
@@ -520,6 +522,8 @@ function setupFilters() {
     btn.addEventListener('click', () => applyYearFilter(btn.dataset.year));
   });
 
+  const mobSel = document.getElementById('mobile-year-select');
+  if (mobSel) mobSel.addEventListener('change', function() { applyYearFilter(this.value); });
 }
 
 function setupKeyboardNav() {
