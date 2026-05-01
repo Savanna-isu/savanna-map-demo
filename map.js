@@ -562,7 +562,7 @@ async function renderPhotosTab(siteId) {
   pane.innerHTML = '';
 
   // Sort bar — icon-only button + dropdown
-  const SORT_LABELS = { likes: 'Most Liked', year: 'By Year', recent: 'Newest' };
+  const SORT_LABELS = { likes: 'Most Liked', year: 'By Year', recent: 'Recent Upload' };
   let currentSort = 'likes';
 
   const toolbar = document.createElement('div');
@@ -577,7 +577,7 @@ async function renderPhotosTab(siteId) {
     <div class="sort-dropdown">
       <button class="sort-option active" data-sort="likes">Most Liked</button>
       <button class="sort-option" data-sort="year">By Year</button>
-      <button class="sort-option" data-sort="recent">Newest</button>
+      <button class="sort-option" data-sort="recent">Recent Upload</button>
     </div>
   `;
   pane.appendChild(toolbar);
