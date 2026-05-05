@@ -1,7 +1,6 @@
 {
   "2000": {
     "instructors": [
-      "Michael Martin",
       "Gary Hightshoe",
       "Heidi Hohmann",
       "Mira Engler"
@@ -347,8 +346,8 @@
   },
   "2010": {
     "instructors": [
-      "Michael Martin",
       "Gary Hightshoe",
+      "Michael Martin",
       "Julie Stevens"
     ],
     "student_count": null,
@@ -391,8 +390,8 @@
   },
   "2011": {
     "instructors": [
-      "Michael Martin",
       "Gary Hightshoe",
+      "Michael Martin",
       "Julie Stevens"
     ],
     "student_count": null,
@@ -527,8 +526,8 @@
   },
   "2014": {
     "instructors": [
-      "Michael Martin",
       "Heidi Hohmann",
+      "Michael Martin",
       "Scot Schuckert"
     ],
     "student_count": null,
@@ -575,8 +574,8 @@
   },
   "2015": {
     "instructors": [
-      "Michael Martin",
       "Heidi Hohmann",
+      "Michael Martin",
       "Scot Schuckert"
     ],
     "student_count": null,
@@ -624,8 +623,8 @@
   },
   "2016": {
     "instructors": [
-      "Michael Martin",
       "Heidi Hohmann",
+      "Michael Martin",
       "Mimi Wagner"
     ],
     "student_count": null,
@@ -673,8 +672,8 @@
   },
   "2017": {
     "instructors": [
-      "Michael Martin",
       "Heidi Hohmann",
+      "Michael Martin",
       "Lauren Schunk"
     ],
     "student_count": null,
@@ -722,8 +721,8 @@
   },
   "2018": {
     "instructors": [
-      "Michael Martin",
       "Heidi Hohmann",
+      "Michael Martin",
       "Austin Dunn"
     ],
     "student_count": null,
@@ -770,10 +769,10 @@
   },
   "2019": {
     "instructors": [
-      "Michael Martin",
+      "Gary Hightshoe",
       "Heidi Hohmann",
-      "Joan Chen",
-      "Gary Hightshoe"
+      "Michael Martin",
+      "Joan Chen"
     ],
     "student_count": null,
     "student_type": null,

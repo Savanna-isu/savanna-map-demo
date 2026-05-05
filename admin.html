@@ -237,6 +237,30 @@
       cursor: pointer;
     }
     .btn-reject:hover { background: #FFEBEE; }
+    .btn-restore {
+      padding: 7px 20px;
+      background: transparent;
+      color: #2E7D32;
+      border: 1px solid #2E7D32;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-restore:hover { background: #E8F5E9; }
+    .btn-delete {
+      padding: 7px 20px;
+      background: #B71C1C;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-delete:hover { background: #7f0000; }
     .status-pill {
       font-size: 0.72rem;
       font-weight: 700;
@@ -414,11 +438,21 @@
 
     const pillClass = { pending:'pill-pending', approved:'pill-approved', rejected:'pill-rejected' }[s.status];
 
-    const actions = tab === 'pending' ? `
-      <div class="sub-actions">
-        <button class="btn-approve" onclick="doApprove('${s.id}')">Approve</button>
-        <button class="btn-reject"  onclick="doReject('${s.id}')">Reject</button>
-      </div>` : '';
+    const photoUrlsJson = JSON.stringify(s.photoUrls || []).replace(/"/g, '&quot;');
+    let actions = '';
+    if (tab === 'pending') {
+      actions = `
+        <div class="sub-actions">
+          <button class="btn-approve" onclick="doApprove('${s.id}')">Approve</button>
+          <button class="btn-reject"  onclick="doReject('${s.id}')">Reject</button>
+        </div>`;
+    } else if (tab === 'rejected') {
+      actions = `
+        <div class="sub-actions">
+          <button class="btn-restore" onclick="doRestore('${s.id}')">Restore to Pending</button>
+          <button class="btn-delete"  onclick="doDelete('${s.id}', ${photoUrlsJson})">Delete Permanently</button>
+        </div>`;
+    }
 
     return `
       <div class="sub-card" id="card-${s.id}">
@@ -453,6 +487,22 @@
       await rejectSubmission(id);
       document.getElementById(`card-${id}`)?.remove();
       updatePendingBadge(-1);
+    } catch (e) { alert('Error: ' + e.message); }
+  }
+
+  async function doRestore(id) {
+    if (!confirm('Restore this submission to Pending?')) return;
+    try {
+      await restoreSubmission(id);
+      document.getElementById(`card-${id}`)?.remove();
+    } catch (e) { alert('Error: ' + e.message); }
+  }
+
+  async function doDelete(id, photoUrls) {
+    if (!confirm('Permanently delete this submission and its photos? This cannot be undone.')) return;
+    try {
+      await deleteSubmission(id, photoUrls);
+      document.getElementById(`card-${id}`)?.remove();
     } catch (e) { alert('Error: ' + e.message); }
   }
 

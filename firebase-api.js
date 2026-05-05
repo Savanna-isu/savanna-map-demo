@@ -132,6 +132,34 @@ async function rejectSubmission(id) {
 }
 
 /**
+ * Restore a rejected submission back to pending. Requires the current user to be signed in.
+ *
+ * @param {string} id - Firestore document ID
+ * @returns {Promise<void>}
+ */
+async function restoreSubmission(id) {
+  await _db.collection('submissions').doc(id).update({
+    status:     'pending',
+    reviewedAt: firebase.firestore.FieldValue.serverTimestamp(),
+  });
+}
+
+/**
+ * Permanently delete a submission and its Storage files. Requires the current user to be signed in.
+ *
+ * @param {string} id       - Firestore document ID
+ * @param {string[]} photoUrls - download URLs of photos to delete from Storage
+ * @returns {Promise<void>}
+ */
+async function deleteSubmission(id, photoUrls = []) {
+  // Delete Storage files (best-effort — ignore individual failures)
+  await Promise.allSettled(
+    photoUrls.map(url => _storage.refFromURL(url).delete())
+  );
+  await _db.collection('submissions').doc(id).delete();
+}
+
+/**
  * Get approved stories, optionally filtered to one site.
  * Readable by anyone (unauthenticated).
  *
