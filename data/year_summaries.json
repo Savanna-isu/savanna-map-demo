@@ -1,6 +1,11 @@
 {
   "2000": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Gary Hightshoe",
+      "Heidi Hohmann",
+      "Mira Engler"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -56,7 +61,9 @@
     "photos": []
   },
   "2001": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -100,7 +107,9 @@
     "photos": []
   },
   "2003": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -143,7 +152,9 @@
     "photos": []
   },
   "2004": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -174,7 +185,9 @@
     "photos": []
   },
   "2005": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -207,7 +220,9 @@
     "photos": []
   },
   "2006": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -247,7 +262,9 @@
     "photos": []
   },
   "2007": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -286,7 +303,9 @@
     "photos": []
   },
   "2008": {
-    "instructors": [],
+    "instructors": [
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -327,7 +346,11 @@
     "photos": []
   },
   "2010": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Gary Hightshoe",
+      "Julie Stevens"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -367,7 +390,11 @@
     "photos": []
   },
   "2011": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Gary Hightshoe",
+      "Julie Stevens"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -410,7 +437,11 @@
     "photos": []
   },
   "2012": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Julie Stevens",
+      "Deb Cooper"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -447,7 +478,11 @@
     "photos": []
   },
   "2013": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Julie Stevens",
+      "Paula Streeter"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -491,7 +526,11 @@
     "photos": []
   },
   "2014": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Heidi Hohmann",
+      "Scot Schuckert"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -535,7 +574,11 @@
     "photos": []
   },
   "2015": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Heidi Hohmann",
+      "Scot Schuckert"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -580,7 +623,11 @@
     "photos": []
   },
   "2016": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Heidi Hohmann",
+      "Mimi Wagner"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -625,7 +672,11 @@
     "photos": []
   },
   "2017": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Heidi Hohmann",
+      "Lauren Schunk"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -670,7 +721,11 @@
     "photos": []
   },
   "2018": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Heidi Hohmann",
+      "Austin Dunn"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -714,7 +769,12 @@
     "photos": []
   },
   "2019": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Heidi Hohmann",
+      "Joan Chen",
+      "Gary Hightshoe"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -758,7 +818,11 @@
     "photos": []
   },
   "2021": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Nate Byro",
+      "Adina Cox"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -799,7 +863,11 @@
     "photos": []
   },
   "2022": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Austin Dunn",
+      "Ellee Stapleton"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
@@ -844,7 +912,11 @@
     "photos": []
   },
   "2023": {
-    "instructors": [],
+    "instructors": [
+      "Michael Martin",
+      "Nate Byro",
+      "Bambi Yost"
+    ],
     "student_count": null,
     "student_type": null,
     "trips": {
